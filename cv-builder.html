@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DP-01 · CV, tips — Plano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+  .hero-title{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:700;
+    font-size:clamp(38px, 6vw, 56px);
+    line-height:1.02;
+    letter-spacing:-0.01em;
+    margin:0 0 16px;
+  }
+  .hero-sub{
+    max-width:620px;
+    font-size:16px;
+    color:var(--ink-soft);
+    margin-bottom:28px;
+  }
+  .spec-strip{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border:1px solid var(--ink);
+    margin-bottom:48px;
+  }
+  .spec-cell{
+    flex:1 1 140px;
+    padding:12px 16px;
+    border-right:1px solid var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .spec-cell:last-child{border-right:none;}
+  .spec-cell .k{display:block; font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:3px;}
+  .spec-cell .v{font-size:13px; color:var(--ink);}
+
+  .tip-section{
+    padding:44px 0 8px;
+    border-top:1px solid var(--grid-line);
+  }
+  .tip-section-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .tip-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--accent-deep);
+  }
+  .tip-section-title{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size:22px;
+  }
+
+  .tip-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    margin-bottom:8px;
+  }
+  .tip-item{
+    display:grid;
+    grid-template-columns:26px 1fr;
+    gap:12px;
+    padding:14px 16px;
+    background:#F4F7F9;
+    border:1px solid var(--grid-line);
+    border-left:3px solid var(--ink-faint);
+  }
+  .tip-item .tick{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-faint);
+    padding-top:2px;
+  }
+  .tip-item p{
+    margin:0;
+    font-size:14px;
+    color:var(--ink);
+    line-height:1.55;
+  }
+  .tip-item strong{color:var(--ink);}
+
+  /* areas grid for section 04 */
+  .area-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:12px;
+    margin-bottom:8px;
+  }
+  .area-card{
+    padding:14px 16px;
+    background:#F4F7F9;
+    border:1px solid var(--grid-line);
+  }
+  .area-card .area-name{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--accent-deep);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    margin-bottom:6px;
+    display:block;
+  }
+  .area-card p{
+    margin:0;
+    font-size:13px;
+    color:var(--ink-soft);
+    line-height:1.5;
+  }
+
+  /* checklist */
+  .checklist{
+    list-style:none;
+    margin:0 0 8px;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .checklist li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:11px 0;
+    border-bottom:1px solid var(--grid-line);
+    font-size:14px;
+    color:var(--ink);
+  }
+  .checklist li::before{
+    content:"□";
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--accent-deep);
+    font-size:15px;
+    line-height:1.3;
+  }
+
+  .warn-box{
+    margin-top:8px;
+    padding:16px 18px;
+    background:var(--next-bg);
+    border:1px solid var(--accent);
+    border-left:3px solid var(--accent-deep);
+    font-size:13.5px;
+    color:var(--ink);
+    max-width:700px;
+  }
+  .warn-box strong{color:var(--accent-deep);}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">≡</button>
+
+<div class="shell">
+
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <a href="index.html" style="text-decoration:none;">
+        <div class="sidebar-eyebrow">FCFM · Ingeniería Civil Industrial</div>
+        <div class="sidebar-logo">PLAN<span>O</span></div>
+      </a>
+      <div class="sidebar-tag">registro de instrumentos</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">01 · Autoconocimiento</div>
+      <a class="nav-link" href="index.html#autoconocimiento"><span class="nav-code">AC-01</span>16Personalities<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="schein.html"><span class="nav-code">AC-02</span>Anclas de Schein<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="area-ici.html"><span class="nav-code">AC-03</span>Área ICI<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="eneagrama.html"><span class="nav-code">AC-04</span>Eneagrama<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="index.html#autoconocimiento"><span class="nav-code">AC-05</span>CliftonStrengths<span class="nav-dot"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">02 · Habilidades</div>
+      <a class="nav-link" href="soft-skills.html"><span class="nav-code">HB-01</span>Soft skills<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="tech-tools.html"><span class="nav-code">HB-02</span>Herramientas técnicas<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">03 · Perfil y comunidad</div>
+      <a class="nav-link" href="index.html#comunidad"><span class="nav-code">PC-01</span>Perfil público<span class="nav-dot"></span></a>
+      <a class="nav-link" href="index.html#comunidad"><span class="nav-code">PC-02</span>Búsqueda y match<span class="nav-dot"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">04 · Desarrollo profesional</div>
+      <a class="nav-link active" href="cv-builder.html"><span class="nav-code">DP-01</span>CV builder<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="index.html#desarrollo"><span class="nav-code">DP-02</span>Trayectorias<span class="nav-dot"></span></a>
+    </div>
+
+    <div class="sidebar-foot">
+      ● disponible &nbsp; ● próximo &nbsp; ● en cola
+    </div>
+  </nav>
+
+  <main class="paper">
+    <div class="container">
+
+      <div class="hero-eyebrow">DP-01 · Desarrollo profesional</div>
+      <h1 class="hero-title">Tips para tu CV</h1>
+      <p class="hero-sub">
+        Esto no es un formulario que arma el CV por ti — es una guía práctica para que tú lo escribas mejor.
+        Nada reemplaza que lo redactes con tu propia voz, pero estos criterios son los que realmente
+        mueven la aguja cuando alguien de RR.HH. le dedica 20 segundos a tu hoja.
+      </p>
+
+      <div class="spec-strip">
+        <div class="spec-cell"><span class="k">Secciones</span><span class="v">7 bloques de tips</span></div>
+        <div class="spec-cell"><span class="k">Lectura</span><span class="v">~8 minutos</span></div>
+        <div class="spec-cell"><span class="k">Formato</span><span class="v">guía, no formulario</span></div>
+        <div class="spec-cell"><span class="k">Incluye</span><span class="v">checklist final</span></div>
+      </div>
+
+      <!-- 01 -->
+      <section class="tip-section">
+        <div class="tip-section-head"><span class="tip-num">01</span><h2 class="tip-section-title">Estructura general</h2></div>
+        <div class="tip-list">
+          <div class="tip-item"><span class="tick">→</span><p><strong>Una página, sin excepciones.</strong> A tu nivel de experiencia, dos páginas no muestran más — muestran que no supiste priorizar.</p></div>
+          <div class="tip-item"><span class="tick">→</span><p><strong>Orden recomendado:</strong> datos de contacto → experiencia (incluye práctica, ayudantías, proyectos) → educación → habilidades y herramientas → idiomas. El "objetivo profesional" genérico sobra: si lo vas a poner, que diga algo específico o no lo pongas.</p></div>
+          <div class="tip-item"><span class="tick">→</span><p><strong>Tipografía legible y consistente:</strong> una sola fuente, tamaños jerárquicos claros, harto espacio en blanco. Evita meter todo apretado para caber en una página — mejor corta contenido.</p></div>
+        </div>
+      </section>
+
+      <!-- 02 -->
+      <section class="tip-section">
+        <div class="tip-section-head"><span class="tip-num">02</span><h2 class="tip-section-title">Cómo describir cada experiencia</h2></div>
+        <div class="tip-list">
+          <div class="tip-item"><span class="tick">→</span><p><strong>Fórmula base:</strong> verbo de acción + qué hiciste + resultado medible. "Optimicé el proceso de picking del centro de distribución, reduciendo el tiempo promedio en 18%" dice mucho más que "encargado de logística".</p></div>
+          <div class="tip-item"><span class="tick">→</span><p><strong>Cuantifica todo lo que puedas:</strong> porcentajes, montos, cantidad de personas, tiempo ahorrado. Si de verdad no hay número, describe el alcance ("coordiné un equipo de 6 personas").</p></div>
+          <div class="tip-item"><span class="tick">→</span><p><strong>Evita verbos pasivos y frases vagas</strong> como "participé en", "apoyé en" o "responsable de". Prefiere verbos activos: lideré, diseñé, implementé, analicé, negocié.</p></div>
+        </div>
+      </section>
+
+      <!-- 03 -->
+      <section class="tip-section">
+        <div class="tip-section-head"><span class="tip-num">03</span><h2 class="tip-section-title">Si sientes que tienes poca experiencia</h2></div>
+        <div class="tip-list">
+          <div class="tip-item"><span class="tick">→</span><p><strong>Tu memoria o proyecto de título cuenta como experiencia real</strong> si lo escribes con la misma fórmula de la sección 02: qué problema resolviste, qué hiciste, qué resultado tuvo.</p></div>
+          <div class="tip-item"><span class="tick">→</span><p><strong>Ayudantías, proyectos de curso relevantes y participación en centros de estudiantes o grupos ICI</strong> (torneos, organización de eventos, comisiones) son evidencia legítima de habilidades blandas y de gestión.</p></div>
+          <div class="tip-item"><span class="tick">→</span><p><strong>No inventes ni infles</strong> — es preferible una experiencia bien descrita que cinco líneas genéricas sin sustancia.</p></div>
+        </div>
+      </section>
+
+      <!-- 04 -->
+      <section class="tip-section">
+        <div class="tip-section-head"><span class="tip-num">04</span><h2 class="tip-section-title">Adapta el énfasis según tu área</h2></div>
+        <p style="color:var(--ink-soft); font-size:13.5px; max-width:620px; margin:-6px 0 20px;">Si ya hiciste el test <a href="area-ici.html" style="color:var(--accent-deep);">AC-03</a>, usa tu área dominante como filtro de qué destacar primero.</p>
+        <div class="area-grid">
+          <div class="area-card"><span class="area-name">Operaciones / SCM</span><p>Destaca procesos que mejoraste, métricas de eficiencia, herramientas de gestión de inventario o producción.</p></div>
+          <div class="area-card"><span class="area-name">Finanzas</span><p>Destaca modelos financieros, evaluación de proyectos, manejo de Excel avanzado, cualquier certificación relevante.</p></div>
+          <div class="area-card"><span class="area-name">Data & Analytics</span><p>Destaca herramientas (Python, SQL, Power BI) y proyectos donde un análisis cambió una decisión real.</p></div>
+          <div class="area-card"><span class="area-name">Personas / RRHH</span><p>Destaca experiencia liderando equipos, mediando conflictos o diseñando procesos de selección o cultura.</p></div>
+          <div class="area-card"><span class="area-name">Estrategia / Consultoría</span><p>Destaca casos de análisis de negocio, competencias de comunicación ejecutiva, trabajo con ambigüedad.</p></div>
+          <div class="area-card"><span class="area-name">Emprendimiento</span><p>Destaca cualquier proyecto propio, aunque no haya funcionado — cuenta qué validaste y qué aprendiste.</p></div>
+          <div class="area-card"><span class="area-name">Sustentabilidad</span><p>Destaca proyectos con componente ambiental o social, certificaciones o cursos en ESG/economía circular.</p></div>
+        </div>
+      </section>
+
+      <!-- 05 -->
+      <section class="tip-section">
+        <div class="tip-section-head"><span class="tip-num">05</span><h2 class="tip-section-title">Errores comunes que restan</h2></div>
+        <div class="tip-list">
+          <div class="tip-item"><span class="tick">✕</span><p>Errores de ortografía o tildes — revisa dos veces, y pide que alguien más lo lea antes de enviarlo.</p></div>
+          <div class="tip-item"><span class="tick">✕</span><p>Foto de mala calidad, informal o de un evento social. Si incluyes foto, que sea profesional y reciente.</p></div>
+          <div class="tip-item"><span class="tick">✕</span><p>Listas interminables de "habilidades blandas" sin evidencia ("proactivo, responsable, trabajo en equipo") — mejor demuéstralas con ejemplos en tu experiencia.</p></div>
+          <div class="tip-item"><span class="tick">✕</span><p>Un correo poco profesional (usa uno con tu nombre, no el que te creaste a los 14 años).</p></div>
+          <div class="tip-item"><span class="tick">✕</span><p>Copiar y pegar el mismo CV para todas las postulaciones sin ajustar el énfasis según el rol.</p></div>
+        </div>
+      </section>
+
+      <!-- 06 -->
+      <section class="tip-section">
+        <div class="tip-section-head"><span class="tip-num">06</span><h2 class="tip-section-title">Formato y sistemas ATS</h2></div>
+        <div class="tip-list">
+          <div class="tip-item"><span class="tick">→</span><p><strong>Envía en PDF</strong> salvo que te pidan explícitamente Word — así se ve igual en cualquier dispositivo.</p></div>
+          <div class="tip-item"><span class="tick">→</span><p><strong>Evita tablas, columnas complejas o texto dentro de imágenes</strong> si vas a subir el CV a un portal de postulación automatizado (ATS): muchos sistemas no logran leer ese contenido y tu información se pierde.</p></div>
+          <div class="tip-item"><span class="tick">→</span><p><strong>Nombra el archivo con tu nombre completo:</strong> "Nombre_Apellido_CV.pdf", no "CV_final_v3_ULTIMO.pdf".</p></div>
+        </div>
+        <div class="warn-box"><strong>Ojo:</strong> el CV es solo una parte de tu candidatura. Mantén tu LinkedIn consistente con lo que dice el CV — muchos reclutadores revisan ambos y las inconsistencias generan dudas.</div>
+      </section>
+
+      <!-- 07 checklist -->
+      <section class="tip-section">
+        <div class="tip-section-head"><span class="tip-num">07</span><h2 class="tip-section-title">Checklist antes de enviarlo</h2></div>
+        <ul class="checklist">
+          <li>Cabe en una página, sin forzar el texto ni dejar espacios vacíos raros.</li>
+          <li>Cada línea de experiencia tiene verbo de acción + qué hiciste + resultado, cuantificado cuando se pudo.</li>
+          <li>No hay errores de ortografía — lo revisaste tú y también otra persona.</li>
+          <li>El correo y el número de contacto están actualizados y son profesionales.</li>
+          <li>El nombre del archivo incluye tu nombre completo.</li>
+          <li>Está guardado y enviado en PDF (salvo que te pidan Word).</li>
+          <li>El énfasis del CV está ajustado al área o rol al que estás postulando.</li>
+          <li>Tu LinkedIn dice lo mismo que tu CV.</li>
+        </ul>
+      </section>
+
+      <div class="titleblock">
+        <div class="tb-cell"><span class="tb-label">Instrumento</span><span class="tb-value">DP-01 — Tips para tu CV</span></div>
+        <div class="tb-cell"><span class="tb-label">Formato</span><span class="tb-value">Guía de lectura</span></div>
+        <div class="tb-cell"><span class="tb-label">Rev.</span><span class="tb-value">00</span></div>
+        <div class="tb-cell"><span class="tb-label">Anterior</span><span class="tb-value">HB-02</span></div>
+      </div>
+
+      <footer class="site-footer">Universidad de Chile — FCFM · Ingeniería Civil Industrial</footer>
+
+    </div>
+  </main>
+
+</div>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  toggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+</script>
+
+</body>
+</html>
