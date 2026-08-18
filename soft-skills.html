@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HB-01 · Soft skills — Plano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+  .hero-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:clamp(38px, 6vw, 56px);
+    line-height:1.02;
+    letter-spacing:-0.01em;
+    margin:0 0 16px;
+  }
+  .hero-sub{
+    max-width:600px;
+    font-size:16px;
+    color:var(--ink-soft);
+    margin-bottom:20px;
+  }
+  .spec-strip{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border:1px solid var(--ink);
+    margin-bottom:44px;
+  }
+  .spec-cell{
+    flex:1 1 140px;
+    padding:12px 16px;
+    border-right:1px solid var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .spec-cell:last-child{border-right:none;}
+  .spec-cell .k{display:block; font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:3px;}
+  .spec-cell .v{font-size:13px; color:var(--ink);}
+
+  .section-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:18px;
+  }
+
+  .skill-row{
+    display:grid;
+    grid-template-columns:200px 1fr 46px;
+    align-items:center;
+    gap:20px;
+    padding:18px 0;
+    border-bottom:1px solid var(--grid-line);
+  }
+  .skill-label .name{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:15.5px;
+    display:block;
+  }
+  .skill-label .desc{
+    font-size:12px;
+    color:var(--ink-faint);
+    margin-top:2px;
+    display:block;
+  }
+  .skill-slider{
+    width:100%;
+    -webkit-appearance:none;
+    appearance:none;
+    height:6px;
+    background:#D3DEE7;
+    border:1px solid var(--grid-line);
+    outline:none;
+    cursor:pointer;
+  }
+  .skill-slider::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:var(--ink);
+    border:2px solid var(--accent);
+    cursor:pointer;
+  }
+  .skill-slider::-moz-range-thumb{
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:var(--ink);
+    border:2px solid var(--accent);
+    cursor:pointer;
+  }
+  .skill-value{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    text-align:right;
+    color:var(--ink);
+  }
+
+  .results-block{margin-top:56px;}
+
+  @media (max-width: 620px){
+    .skill-row{grid-template-columns:1fr; gap:8px;}
+    .skill-value{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">≡</button>
+
+<div class="shell">
+
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <a href="index.html" style="text-decoration:none;">
+        <div class="sidebar-eyebrow">FCFM · Ingeniería Civil Industrial</div>
+        <div class="sidebar-logo">PLAN<span>O</span></div>
+      </a>
+      <div class="sidebar-tag">registro de instrumentos</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">01 · Autoconocimiento</div>
+      <a class="nav-link" href="index.html#autoconocimiento"><span class="nav-code">AC-01</span>16Personalities<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="schein.html"><span class="nav-code">AC-02</span>Anclas de Schein<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="area-ici.html"><span class="nav-code">AC-03</span>Área ICI<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="eneagrama.html"><span class="nav-code">AC-04</span>Eneagrama<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="index.html#autoconocimiento"><span class="nav-code">AC-05</span>CliftonStrengths<span class="nav-dot"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">02 · Habilidades</div>
+      <a class="nav-link active" href="soft-skills.html"><span class="nav-code">HB-01</span>Soft skills<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="tech-tools.html"><span class="nav-code">HB-02</span>Herramientas técnicas<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">03 · Perfil y comunidad</div>
+      <a class="nav-link" href="index.html#comunidad"><span class="nav-code">PC-01</span>Perfil público<span class="nav-dot"></span></a>
+      <a class="nav-link" href="index.html#comunidad"><span class="nav-code">PC-02</span>Búsqueda y match<span class="nav-dot"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">04 · Desarrollo profesional</div>
+      <a class="nav-link" href="index.html#desarrollo"><span class="nav-code">DP-01</span>CV builder<span class="nav-dot"></span></a>
+      <a class="nav-link" href="index.html#desarrollo"><span class="nav-code">DP-02</span>Trayectorias<span class="nav-dot"></span></a>
+    </div>
+
+    <div class="sidebar-foot">
+      ● disponible &nbsp; ● próximo &nbsp; ● en cola
+    </div>
+  </nav>
+
+  <main class="paper">
+    <div class="container">
+
+      <div class="hero-eyebrow">HB-01 · Habilidades</div>
+      <h1 class="hero-title">Soft skills</h1>
+      <p class="hero-sub">
+        A diferencia de los tests anteriores, esto no se responde con afirmaciones sino con tu propia
+        autoevaluación. Mueve cada control según qué tan fuerte te sientes hoy en cada habilidad —
+        sé honesto/a, esto es lo que otros compañeros verán en tu ficha para armar equipo contigo.
+      </p>
+
+      <div class="spec-strip">
+        <div class="spec-cell"><span class="k">Dimensiones</span><span class="v">6 habilidades</span></div>
+        <div class="spec-cell"><span class="k">Formato</span><span class="v">autoevaluación 1–10</span></div>
+        <div class="spec-cell"><span class="k">Duración</span><span class="v">~5 minutos</span></div>
+        <div class="spec-cell"><span class="k">Resultado</span><span class="v">se actualiza en vivo</span></div>
+      </div>
+
+      <div class="section-label">Ajusta cada control</div>
+      <div id="sliders"></div>
+
+      <div class="results-block">
+        <div class="results-eyebrow">Resultado · HB-01</div>
+        <h2 class="results-title">Tu perfil de soft skills</h2>
+        <p class="results-sub">Se actualiza mientras mueves los controles. Las dos habilidades más altas quedan destacadas como tus fortalezas principales.</p>
+
+        <div id="barsContainer"></div>
+        <div class="anchor-callouts" id="calloutsContainer"></div>
+
+        <div class="share-box">
+          <span class="label">Enviar resultado a tu correo</span>
+          <div class="share-row">
+            <input type="email" class="share-input" id="emailInput" placeholder="tu-correo@ing.uchile.cl">
+            <button class="share-btn" id="emailBtn">Enviar por correo →</button>
+          </div>
+          <p class="share-note">Se abre tu aplicación de correo con el resultado ya redactado, listo para enviar.</p>
+          <p class="share-error" id="emailError">Ingresa un correo válido antes de continuar.</p>
+        </div>
+
+        <div class="results-actions">
+          <a class="nav-btn primary" href="index.html">Volver al índice →</a>
+        </div>
+      </div>
+
+      <div class="titleblock">
+        <div class="tb-cell"><span class="tb-label">Instrumento</span><span class="tb-value">HB-01 — Soft skills</span></div>
+        <div class="tb-cell"><span class="tb-label">Formato</span><span class="tb-value">Autoevaluación 1–10</span></div>
+        <div class="tb-cell"><span class="tb-label">Rev.</span><span class="tb-value">00</span></div>
+        <div class="tb-cell"><span class="tb-label">Anterior</span><span class="tb-value">AC-04</span></div>
+      </div>
+
+      <footer class="site-footer">Universidad de Chile — FCFM · Ingeniería Civil Industrial</footer>
+
+    </div>
+  </main>
+
+</div>
+
+<style>
+  .nav-btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    background:none;
+    border:1px solid var(--ink-faint);
+    color:var(--ink);
+    padding:10px 18px;
+    border-radius:var(--radius);
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-flex;
+  }
+  .nav-btn.primary{background:var(--ink); color:#F2F6FA; border-color:var(--ink);}
+  .nav-btn.primary:hover{background:#1C3757;}
+</style>
+
+<script>
+  const SKILLS = {
+    COM: { name: "Comunicación",      desc: "Explicar ideas con claridad, oral y escrita.", value: 6 },
+    LID: { name: "Liderazgo",         desc: "Movilizar y guiar a un equipo hacia una meta.", value: 6 },
+    EQU: { name: "Trabajo en equipo", desc: "Colaborar y ceder cuando el objetivo lo requiere.", value: 6 },
+    NEG: { name: "Negociación",       desc: "Llegar a acuerdos que funcionen para ambas partes.", value: 6 },
+    CRI: { name: "Pensamiento crítico", desc: "Cuestionar supuestos y evaluar evidencia.", value: 6 },
+    ADA: { name: "Adaptabilidad",     desc: "Ajustarte rápido cuando el contexto cambia.", value: 6 }
+  };
+
+  const slidersContainer = document.getElementById('sliders');
+
+  Object.entries(SKILLS).forEach(([code, skill]) => {
+    const row = document.createElement('div');
+    row.className = 'skill-row';
+    row.innerHTML = `
+      <div class="skill-label">
+        <span class="name">${skill.name}</span>
+        <span class="desc">${skill.desc}</span>
+      </div>
+      <input type="range" min="1" max="10" value="${skill.value}" class="skill-slider" data-code="${code}">
+      <div class="skill-value" id="val-${code}">${skill.value}</div>
+    `;
+    slidersContainer.appendChild(row);
+  });
+
+  slidersContainer.querySelectorAll('.skill-slider').forEach(slider => {
+    slider.addEventListener('input', (e) => {
+      const code = e.target.dataset.code;
+      SKILLS[code].value = parseInt(e.target.value);
+      document.getElementById('val-' + code).textContent = e.target.value;
+      renderResults();
+    });
+  });
+
+  function renderResults(){
+    const ranked = Object.entries(SKILLS).sort((a, b) => b[1].value - a[1].value);
+
+    const barsContainer = document.getElementById('barsContainer');
+    barsContainer.innerHTML = '';
+    ranked.forEach(([code, skill], rank) => {
+      const row = document.createElement('div');
+      row.className = 'anchor-bar' + (rank === 0 ? ' top-1' : rank === 1 ? ' top-2' : '');
+      row.innerHTML = `
+        <span class="anchor-name">${skill.name}</span>
+        <div class="anchor-track"><div class="anchor-fill" style="width:${skill.value * 10}%"></div></div>
+        <span class="anchor-value">${skill.value}/10</span>
+      `;
+      barsContainer.appendChild(row);
+    });
+
+    const calloutsContainer = document.getElementById('calloutsContainer');
+    calloutsContainer.innerHTML = '';
+    ranked.slice(0, 2).forEach(([code, skill], rank) => {
+      const div = document.createElement('div');
+      div.className = 'callout';
+      div.innerHTML = `
+        <div class="rank">${rank === 0 ? 'Fortaleza principal' : 'Segunda fortaleza'}</div>
+        <h4>${skill.name}</h4>
+        <p>${skill.desc}</p>
+      `;
+      calloutsContainer.appendChild(div);
+    });
+  }
+
+  renderResults();
+
+  /* ---------------- send result by email (mailto) ---------------- */
+  const emailInput = document.getElementById('emailInput');
+  const emailBtn = document.getElementById('emailBtn');
+  const emailError = document.getElementById('emailError');
+
+  emailBtn.addEventListener('click', () => {
+    const email = emailInput.value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if(!valid){
+      emailError.classList.add('visible');
+      return;
+    }
+    emailError.classList.remove('visible');
+
+    const ranked = Object.entries(SKILLS).sort((a, b) => b[1].value - a[1].value);
+    const lines = ranked.map(([code, skill], i) => `${i + 1}. ${skill.name} — ${skill.value}/10`).join('\n');
+
+    const subject = 'Mi resultado — HB-01 Soft skills';
+    const body =
+`Autoevaluación de soft skills — Plano, ICI U. de Chile
+
+Fortaleza principal: ${ranked[0][1].name}
+Segunda fortaleza: ${ranked[1][1].name}
+
+Puntaje completo:
+${lines}
+
+Generado en Plano — red profesional ICI.`;
+
+    const mailto = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+  });
+
+  /* ---------------- sidebar mobile toggle ---------------- */
+  const toggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  toggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+</script>
+
+</body>
+</html>

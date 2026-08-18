@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AC-03 · ¿Qué área de ICI va contigo? — Plano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+
+  /* ---------- intro ---------- */
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+  .hero-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:clamp(34px, 5.6vw, 52px);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    margin:0 0 16px;
+  }
+  .hero-sub{
+    max-width:600px;
+    font-size:16px;
+    color:var(--ink-soft);
+    margin-bottom:28px;
+  }
+
+  .spec-strip{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border:1px solid var(--ink);
+    margin-bottom:36px;
+  }
+  .spec-cell{
+    flex:1 1 140px;
+    padding:12px 16px;
+    border-right:1px solid var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .spec-cell:last-child{border-right:none;}
+  .spec-cell .k{display:block; font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:3px;}
+  .spec-cell .v{font-size:13px; color:var(--ink);}
+
+  .start-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--ink);
+    color:#F2F6FA;
+    border:none;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    letter-spacing:0.02em;
+    padding:14px 22px;
+    border-radius:var(--radius);
+    cursor:pointer;
+    transition:background 0.15s ease, transform 0.15s ease;
+  }
+  .start-btn:hover{background:#1C3757; transform:translateY(-1px);}
+  .start-btn .arrow{transition:transform 0.15s ease;}
+  .start-btn:hover .arrow{transform:translateX(3px);}
+
+  /* areas preview row on intro */
+  .areas-preview{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:32px;
+  }
+  .area-chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    border:1px solid var(--grid-line);
+    padding:5px 10px;
+    border-radius:20px;
+  }
+
+  /* ---------- quiz ---------- */
+  .quiz-wrap{display:none;}
+  .quiz-wrap.active{display:block;}
+  .intro-wrap.hidden, .results-wrap.hidden{display:none;}
+
+  .progress-rail{margin:8px 0 44px;}
+  .progress-meta{
+    display:flex;
+    justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+  .progress-track{
+    position:relative;
+    height:8px;
+    background:#D3DEE7;
+    border:1px solid var(--grid-line);
+  }
+  .progress-fill{
+    position:absolute;
+    top:0; left:0; bottom:0;
+    background:var(--accent);
+    width:0%;
+    transition:width 0.25s ease;
+  }
+
+  .question-code{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--accent-deep);
+    letter-spacing:0.06em;
+    margin-bottom:10px;
+  }
+  .question-text{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:clamp(22px, 3.4vw, 30px);
+    line-height:1.25;
+    margin:0 0 40px;
+    max-width:640px;
+  }
+
+  .scale{max-width:640px; margin-bottom:10px;}
+  .scale-row{display:flex; gap:8px;}
+  .scale-btn{
+    flex:1;
+    aspect-ratio:1;
+    max-width:64px;
+    border:1.5px solid var(--ink);
+    background:transparent;
+    color:var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:16px;
+    font-weight:500;
+    border-radius:50%;
+    cursor:pointer;
+    transition:background 0.12s ease, color 0.12s ease, transform 0.12s ease;
+  }
+  .scale-btn:hover{transform:translateY(-2px);}
+  .scale-btn.selected{background:var(--ink); color:var(--accent);}
+  .scale-labels{
+    display:flex;
+    justify-content:space-between;
+    font-size:11.5px;
+    color:var(--ink-faint);
+    margin-top:10px;
+  }
+
+  .quiz-nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:40px;
+    max-width:640px;
+  }
+  .nav-btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    background:none;
+    border:1px solid var(--ink-faint);
+    color:var(--ink);
+    padding:10px 18px;
+    border-radius:var(--radius);
+    cursor:pointer;
+    transition:border-color 0.15s ease, background 0.15s ease;
+  }
+  .nav-btn:hover:not(:disabled){border-color:var(--ink); background:#DCE5EC;}
+  .nav-btn:disabled{opacity:0.35; cursor:not-allowed;}
+  .nav-btn.primary{background:var(--ink); color:#F2F6FA; border-color:var(--ink);}
+  .nav-btn.primary:hover{background:#1C3757;}
+
+  /* ---------- results ---------- */
+  .results-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent-deep);
+    margin-bottom:10px;
+  }
+  .results-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:clamp(30px, 5vw, 42px);
+    margin:0 0 8px;
+  }
+  .results-sub{
+    color:var(--ink-soft);
+    max-width:600px;
+    margin-bottom:36px;
+  }
+
+  .anchor-bar{
+    display:grid;
+    grid-template-columns:220px 1fr 40px;
+    align-items:center;
+    gap:14px;
+    padding:10px 0;
+    border-bottom:1px solid var(--grid-line);
+  }
+  .anchor-name{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink);
+  }
+  .anchor-track{
+    height:14px;
+    background:#DCE5EC;
+    border:1px solid var(--grid-line);
+    position:relative;
+  }
+  .anchor-fill{height:100%; background:var(--ink-faint);}
+  .anchor-bar.top-1 .anchor-fill{background:var(--accent);}
+  .anchor-bar.top-2 .anchor-fill{background:var(--accent-deep);}
+  .anchor-bar.top-1 .anchor-name{color:var(--accent-deep); font-weight:600;}
+  .anchor-value{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-faint);
+    text-align:right;
+  }
+
+  .anchor-callouts{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  .callout{
+    background:#F4F7F9;
+    border:1px solid var(--grid-line);
+    border-left:3px solid var(--accent);
+    padding:18px 20px;
+  }
+  .callout .rank{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent-deep);
+    margin-bottom:6px;
+  }
+  .callout h4{
+    font-family:'Space Grotesk', sans-serif;
+    margin:0 0 8px;
+    font-size:18px;
+  }
+  .callout p{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  .combo-note{
+    margin-top:16px;
+    font-size:12.5px;
+    color:var(--ink-faint);
+    max-width:640px;
+  }
+
+  .results-actions{
+    display:flex;
+    gap:12px;
+    margin-top:40px;
+    flex-wrap:wrap;
+  }
+
+  @media (max-width: 620px){
+    .anchor-callouts{grid-template-columns:1fr;}
+    .anchor-bar{grid-template-columns:128px 1fr 32px; gap:8px;}
+    .scale-btn{max-width:44px; font-size:13px;}
+  }
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">≡</button>
+
+<div class="shell">
+
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <a href="index.html" style="text-decoration:none;">
+        <div class="sidebar-eyebrow">FCFM · Ingeniería Civil Industrial</div>
+        <div class="sidebar-logo">PLAN<span>O</span></div>
+      </a>
+      <div class="sidebar-tag">registro de instrumentos</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">01 · Autoconocimiento</div>
+      <a class="nav-link" href="index.html#autoconocimiento"><span class="nav-code">AC-01</span>16Personalities<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="schein.html"><span class="nav-code">AC-02</span>Anclas de Schein<span class="nav-dot ok"></span></a>
+      <a class="nav-link active" href="area-ici.html"><span class="nav-code">AC-03</span>Área ICI<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="eneagrama.html"><span class="nav-code">AC-04</span>Eneagrama<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="index.html#autoconocimiento"><span class="nav-code">AC-05</span>CliftonStrengths<span class="nav-dot"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">02 · Habilidades</div>
+      <a class="nav-link" href="soft-skills.html"><span class="nav-code">HB-01</span>Soft skills<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="tech-tools.html"><span class="nav-code">HB-02</span>Herramientas técnicas<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">03 · Perfil y comunidad</div>
+      <a class="nav-link" href="index.html#comunidad"><span class="nav-code">PC-01</span>Perfil público<span class="nav-dot"></span></a>
+      <a class="nav-link" href="index.html#comunidad"><span class="nav-code">PC-02</span>Búsqueda y match<span class="nav-dot"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">04 · Desarrollo profesional</div>
+      <a class="nav-link" href="index.html#desarrollo"><span class="nav-code">DP-01</span>CV builder<span class="nav-dot"></span></a>
+      <a class="nav-link" href="index.html#desarrollo"><span class="nav-code">DP-02</span>Trayectorias<span class="nav-dot"></span></a>
+    </div>
+
+    <div class="sidebar-foot">
+      ● disponible &nbsp; ● próximo &nbsp; ● en cola
+    </div>
+  </nav>
+
+  <main class="paper">
+    <div class="container">
+
+      <!-- ============ INTRO ============ -->
+      <div class="intro-wrap" id="introWrap">
+        <div class="hero-eyebrow">AC-03 · Autoconocimiento</div>
+        <h1 class="hero-title">¿Qué área de ICI va contigo?</h1>
+        <p class="hero-sub">
+          Ingeniería Civil Industrial abre hacia caminos muy distintos entre sí. Este test cruza lo que
+          disfrutas hacer con lo que te iría bien, entre siete áreas típicas de la carrera, para darte
+          un punto de partida concreto a la hora de elegir memoria, práctica o primer trabajo.
+        </p>
+
+        <div class="areas-preview">
+          <span class="area-chip">Operaciones / SCM</span>
+          <span class="area-chip">Finanzas</span>
+          <span class="area-chip">Data & Analytics</span>
+          <span class="area-chip">Personas / RRHH</span>
+          <span class="area-chip">Estrategia / Consultoría</span>
+          <span class="area-chip">Emprendimiento</span>
+          <span class="area-chip">Sustentabilidad</span>
+        </div>
+
+        <div class="spec-strip">
+          <div class="spec-cell"><span class="k">Ítems</span><span class="v">28 afirmaciones</span></div>
+          <div class="spec-cell"><span class="k">Escala</span><span class="v">1 a 6, sin punto medio</span></div>
+          <div class="spec-cell"><span class="k">Duración</span><span class="v">~7 minutos</span></div>
+          <div class="spec-cell"><span class="k">Resultado</span><span class="v">tu área dominante</span></div>
+        </div>
+
+        <button class="start-btn" id="startBtn">Empezar test <span class="arrow">→</span></button>
+      </div>
+
+      <!-- ============ QUIZ ============ -->
+      <div class="quiz-wrap" id="quizWrap">
+        <div class="progress-rail">
+          <div class="progress-meta">
+            <span id="progressLabel">Pregunta 01 / 28</span>
+            <span>AC-03 · Área ICI</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+
+        <div class="question-code" id="questionCode">ÍTEM 01</div>
+        <h2 class="question-text" id="questionText">—</h2>
+
+        <div class="scale">
+          <div class="scale-row" id="scaleRow"></div>
+          <div class="scale-labels">
+            <span>Muy en desacuerdo</span>
+            <span>Muy de acuerdo</span>
+          </div>
+        </div>
+
+        <div class="quiz-nav">
+          <button class="nav-btn" id="prevBtn">← Anterior</button>
+          <button class="nav-btn primary" id="nextBtn" disabled>Siguiente →</button>
+        </div>
+      </div>
+
+      <!-- ============ RESULTS ============ -->
+      <div class="results-wrap hidden" id="resultsWrap">
+        <div class="results-eyebrow">Resultado · AC-03</div>
+        <h2 class="results-title">Tu ficha de área</h2>
+        <p class="results-sub">Puntaje por área (máximo 24 cada una). Muchas trayectorias reales viven en el cruce de tus dos áreas más altas, no solo en la primera.</p>
+
+        <div id="barsContainer"></div>
+
+        <div class="anchor-callouts" id="calloutsContainer"></div>
+        <p class="combo-note" id="comboNote"></p>
+
+        <div class="share-box">
+          <span class="label">Enviar resultado a tu correo</span>
+          <div class="share-row">
+            <input type="email" class="share-input" id="emailInput" placeholder="tu-correo@ing.uchile.cl">
+            <button class="share-btn" id="emailBtn">Enviar por correo →</button>
+          </div>
+          <p class="share-note">Se abre tu aplicación de correo con el resultado ya redactado, listo para enviar.</p>
+          <p class="share-error" id="emailError">Ingresa un correo válido antes de continuar.</p>
+        </div>
+
+        <div class="results-actions">
+          <button class="nav-btn" id="retakeBtn">↺ Repetir test</button>
+          <a class="nav-btn primary" href="index.html">Volver al índice →</a>
+        </div>
+      </div>
+
+      <div class="titleblock">
+        <div class="tb-cell"><span class="tb-label">Instrumento</span><span class="tb-value">AC-03 — ¿Qué área de ICI va contigo?</span></div>
+        <div class="tb-cell"><span class="tb-label">Escala</span><span class="tb-value">Likert 1–6</span></div>
+        <div class="tb-cell"><span class="tb-label">Rev.</span><span class="tb-value">00</span></div>
+        <div class="tb-cell"><span class="tb-label">Anterior</span><span class="tb-value">AC-02</span></div>
+      </div>
+
+      <footer class="site-footer">Universidad de Chile — FCFM · Ingeniería Civil Industrial</footer>
+
+    </div>
+  </main>
+
+</div>
+
+<script>
+  /* ---------------- data ---------------- */
+  const ANCHORS = {
+    OPS: { name: "Operaciones / SCM",         desc: "Te mueve la eficiencia de procesos reales: producción, logística, cadena de suministro. Roles afines: Supply Chain, Operaciones, Mejora Continua, Planificación." },
+    FIN: { name: "Finanzas",                  desc: "Te mueve el lenguaje de los números y el valor. Roles afines: Banca de inversión, Corporate Finance, Tesorería, Evaluación de proyectos." },
+    DAT: { name: "Data & Analytics",          desc: "Te mueve encontrar patrones y construir con datos. Roles afines: Data Analyst, Data Scientist, Business Intelligence, Analytics." },
+    PER: { name: "Personas / RRHH",           desc: "Te mueve el desarrollo de personas y equipos. Roles afines: RRHH, Desarrollo Organizacional, People Analytics, Cultura y Talento." },
+    EST: { name: "Estrategia / Consultoría",  desc: "Te mueve resolver problemas de negocio amplios. Roles afines: Consultoría estratégica, Corporate Strategy, Planificación Estratégica, PMO." },
+    EMP: { name: "Emprendimiento",            desc: "Te mueve construir algo propio desde cero. Roles afines: Fundador/a de startup, Venture Building, Innovación Corporativa." },
+    SUS: { name: "Sustentabilidad",           desc: "Te mueve el impacto ambiental y social del negocio. Roles afines: Sustentabilidad Corporativa, ESG, Economía Circular, Impacto Social." }
+  };
+
+  const QUESTIONS = [
+    ["Me atrae optimizar procesos productivos o logísticos para que funcionen mejor.", "OPS"],
+    ["Me interesa entender cómo se financia y valora un proyecto o una empresa.", "FIN"],
+    ["Me interesa transformar datos en decisiones concretas para el negocio.", "DAT"],
+    ["Me interesa cómo se diseñan los equipos, la cultura y el desarrollo de las personas en una organización.", "PER"],
+    ["Me interesa resolver problemas de negocio amplios que combinan varias áreas a la vez.", "EST"],
+    ["Me atrae la idea de crear mi propio negocio o proyecto desde cero.", "EMP"],
+    ["Me interesa que mi trabajo tenga un impacto ambiental o social positivo, no solo financiero.", "SUS"],
+    ["Disfruto pensar en cómo mover, producir o distribuir algo de forma más eficiente.", "OPS"],
+    ["Disfruto trabajar con modelos financieros, flujos de caja o evaluación de inversiones.", "FIN"],
+    ["Disfruto programar, modelar o construir dashboards más que gestionar personas.", "DAT"],
+    ["Disfruto mediar conversaciones difíciles o ayudar a que un equipo funcione mejor.", "PER"],
+    ["Disfruto analizar una industria completa y proponer hacia dónde debería moverse una empresa.", "EST"],
+    ["Disfruto validar una idea de negocio hablando con clientes reales, aunque sea incómodo.", "EMP"],
+    ["Disfruto pensar en cómo una empresa puede operar de forma más responsable con su entorno.", "SUS"],
+    ["Me interesa lo que pasa en la planta, la bodega o el centro de distribución, no solo en la oficina.", "OPS"],
+    ["Me atrae el mundo de la banca, el mercado de capitales o el corporate finance.", "FIN"],
+    ["Me atrae aprender herramientas como Python, SQL o machine learning aplicado a negocios.", "DAT"],
+    ["Me atrae el reclutamiento, la gestión del talento o el desarrollo organizacional.", "PER"],
+    ["Me atrae el mundo de la consultoría estratégica o el trabajo con directorios y gerencias.", "EST"],
+    ["Prefiero asumir el riesgo de emprender antes que la estabilidad de un sueldo fijo.", "EMP"],
+    ["Me atraen temas como economía circular, cambio climático o ESG.", "SUS"],
+    ["Prefiero resolver cuellos de botella concretos antes que diseñar estrategias de largo plazo.", "OPS"],
+    ["Prefiero decisiones que se puedan justificar con números duros antes que con intuición.", "FIN"],
+    ["Prefiero encontrar el patrón detrás de los datos antes que ejecutar la acción final.", "DAT"],
+    ["Prefiero trabajar en el \"cómo\" colaboran las personas antes que en el proceso técnico en sí.", "PER"],
+    ["Prefiero preguntas abiertas de \"qué deberíamos hacer\" antes que ejecutar una tarea ya definida.", "EST"],
+    ["Me interesa más construir algo nuevo que optimizar algo que ya existe.", "EMP"],
+    ["Elegiría un proyecto con propósito ambiental o social aunque el crecimiento profesional sea más lento.", "SUS"]
+  ];
+
+  /* ---------------- state ---------------- */
+  let current = 0;
+  const answers = new Array(QUESTIONS.length).fill(null);
+
+  const introWrap = document.getElementById('introWrap');
+  const quizWrap = document.getElementById('quizWrap');
+  const resultsWrap = document.getElementById('resultsWrap');
+  const startBtn = document.getElementById('startBtn');
+  const progressFill = document.getElementById('progressFill');
+  const progressLabel = document.getElementById('progressLabel');
+  const questionCode = document.getElementById('questionCode');
+  const questionText = document.getElementById('questionText');
+  const scaleRow = document.getElementById('scaleRow');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const retakeBtn = document.getElementById('retakeBtn');
+  let lastRanked = [];
+
+  for(let i = 1; i <= 6; i++){
+    const btn = document.createElement('button');
+    btn.className = 'scale-btn';
+    btn.textContent = i;
+    btn.type = 'button';
+    btn.addEventListener('click', () => selectAnswer(i));
+    scaleRow.appendChild(btn);
+  }
+
+  function renderQuestion(){
+    const [text, code] = QUESTIONS[current];
+    questionCode.textContent = 'ÍTEM ' + String(current + 1).padStart(2, '0');
+    questionText.textContent = text;
+    progressLabel.textContent = 'Pregunta ' + String(current + 1).padStart(2, '0') + ' / ' + QUESTIONS.length;
+    progressFill.style.width = ((current) / QUESTIONS.length * 100) + '%';
+
+    [...scaleRow.children].forEach((btn, idx) => {
+      btn.classList.toggle('selected', answers[current] === idx + 1);
+    });
+
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = answers[current] === null;
+    nextBtn.textContent = current === QUESTIONS.length - 1 ? 'Ver resultado →' : 'Siguiente →';
+  }
+
+  function selectAnswer(value){
+    answers[current] = value;
+    renderQuestion();
+  }
+
+  startBtn.addEventListener('click', () => {
+    introWrap.classList.add('hidden');
+    quizWrap.classList.add('active');
+    renderQuestion();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if(current > 0){ current--; renderQuestion(); }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if(answers[current] === null) return;
+    if(current < QUESTIONS.length - 1){
+      current++;
+      renderQuestion();
+    } else {
+      showResults();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if(!quizWrap.classList.contains('active')) return;
+    if(['1','2','3','4','5','6'].includes(e.key)) selectAnswer(parseInt(e.key));
+    if(e.key === 'ArrowRight' && !nextBtn.disabled) nextBtn.click();
+    if(e.key === 'ArrowLeft' && !prevBtn.disabled) prevBtn.click();
+  });
+
+  function showResults(){
+    quizWrap.classList.remove('active');
+    resultsWrap.classList.remove('hidden');
+    progressFill.style.width = '100%';
+
+    const scores = {};
+    Object.keys(ANCHORS).forEach(k => scores[k] = 0);
+    QUESTIONS.forEach(([text, code], idx) => {
+      scores[code] += answers[idx];
+    });
+
+    const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+    lastRanked = ranked;
+
+    const barsContainer = document.getElementById('barsContainer');
+    barsContainer.innerHTML = '';
+    ranked.forEach(([code, score], rank) => {
+      const row = document.createElement('div');
+      row.className = 'anchor-bar' + (rank === 0 ? ' top-1' : rank === 1 ? ' top-2' : '');
+      row.innerHTML = `
+        <span class="anchor-name">${ANCHORS[code].name}</span>
+        <div class="anchor-track"><div class="anchor-fill" style="width:${(score/24*100).toFixed(0)}%"></div></div>
+        <span class="anchor-value">${score}/24</span>
+      `;
+      barsContainer.appendChild(row);
+    });
+
+    const calloutsContainer = document.getElementById('calloutsContainer');
+    calloutsContainer.innerHTML = '';
+    ranked.slice(0, 2).forEach(([code, score], rank) => {
+      const div = document.createElement('div');
+      div.className = 'callout';
+      div.innerHTML = `
+        <div class="rank">${rank === 0 ? 'Área dominante' : 'Segunda área'}</div>
+        <h4>${ANCHORS[code].name}</h4>
+        <p>${ANCHORS[code].desc}</p>
+      `;
+      calloutsContainer.appendChild(div);
+    });
+
+    const [topCode] = ranked[0];
+    const [secondCode] = ranked[1];
+    document.getElementById('comboNote').textContent =
+      `Vale la pena mirar también el cruce entre ${ANCHORS[topCode].name} y ${ANCHORS[secondCode].name}: bastantes roles interesantes viven justo en esa intersección, no en ninguna de las dos por separado.`;
+  }
+
+  retakeBtn.addEventListener('click', () => {
+    current = 0;
+    answers.fill(null);
+    resultsWrap.classList.add('hidden');
+    introWrap.classList.remove('hidden');
+  });
+
+  /* ---------------- send result by email (mailto) ---------------- */
+  const emailInput = document.getElementById('emailInput');
+  const emailBtn = document.getElementById('emailBtn');
+  const emailError = document.getElementById('emailError');
+
+  emailBtn.addEventListener('click', () => {
+    const email = emailInput.value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if(!valid){
+      emailError.classList.add('visible');
+      return;
+    }
+    emailError.classList.remove('visible');
+
+    const lines = lastRanked.map(([code, score], i) =>
+      `${i + 1}. ${ANCHORS[code].name} — ${score}/24`
+    ).join('\n');
+
+    const [topCode] = lastRanked[0];
+    const subject = 'Mi resultado — AC-03 ¿Qué área de ICI va contigo?';
+    const body =
+`Resultado del test "¿Qué área de ICI va contigo?" — Plano, ICI U. de Chile
+
+Área dominante: ${ANCHORS[topCode].name}
+${ANCHORS[topCode].desc}
+
+Puntaje completo:
+${lines}
+
+Generado en Plano — red profesional ICI.`;
+
+    const mailto = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+  });
+
+  /* ---------------- sidebar mobile toggle ---------------- */
+  const toggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  toggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+</script>
+
+</body>
+</html>

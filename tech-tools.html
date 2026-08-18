@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HB-02 · Herramientas técnicas — Plano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+  .hero-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:clamp(38px, 6vw, 56px);
+    line-height:1.02;
+    letter-spacing:-0.01em;
+    margin:0 0 16px;
+  }
+  .hero-sub{
+    max-width:600px;
+    font-size:16px;
+    color:var(--ink-soft);
+    margin-bottom:20px;
+  }
+  .spec-strip{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border:1px solid var(--ink);
+    margin-bottom:44px;
+  }
+  .spec-cell{
+    flex:1 1 140px;
+    padding:12px 16px;
+    border-right:1px solid var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .spec-cell:last-child{border-right:none;}
+  .spec-cell .k{display:block; font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:3px;}
+  .spec-cell .v{font-size:13px; color:var(--ink);}
+
+  .section-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:18px;
+  }
+
+  .tool-row{
+    padding:18px 0;
+    border-bottom:1px solid var(--grid-line);
+  }
+  .tool-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:12px;
+    gap:12px;
+  }
+  .tool-head .name{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:15.5px;
+  }
+  .tool-head .desc{
+    font-size:12px;
+    color:var(--ink-faint);
+  }
+  .level-row{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:8px;
+  }
+  .level-btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    padding:9px 6px;
+    text-align:center;
+    border:1px solid var(--ink-faint);
+    background:transparent;
+    color:var(--ink-soft);
+    border-radius:var(--radius);
+    cursor:pointer;
+    transition:background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+  }
+  .level-btn:hover{border-color:var(--ink);}
+  .level-btn.selected{
+    background:var(--ink);
+    color:var(--accent);
+    border-color:var(--ink);
+  }
+
+  .results-block{margin-top:56px;}
+
+  @media (max-width: 560px){
+    .level-row{grid-template-columns:repeat(2, 1fr);}
+  }
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">≡</button>
+
+<div class="shell">
+
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <a href="index.html" style="text-decoration:none;">
+        <div class="sidebar-eyebrow">FCFM · Ingeniería Civil Industrial</div>
+        <div class="sidebar-logo">PLAN<span>O</span></div>
+      </a>
+      <div class="sidebar-tag">registro de instrumentos</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">01 · Autoconocimiento</div>
+      <a class="nav-link" href="index.html#autoconocimiento"><span class="nav-code">AC-01</span>16Personalities<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="schein.html"><span class="nav-code">AC-02</span>Anclas de Schein<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="area-ici.html"><span class="nav-code">AC-03</span>Área ICI<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="eneagrama.html"><span class="nav-code">AC-04</span>Eneagrama<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="index.html#autoconocimiento"><span class="nav-code">AC-05</span>CliftonStrengths<span class="nav-dot"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">02 · Habilidades</div>
+      <a class="nav-link" href="soft-skills.html"><span class="nav-code">HB-01</span>Soft skills<span class="nav-dot ok"></span></a>
+      <a class="nav-link active" href="tech-tools.html"><span class="nav-code">HB-02</span>Herramientas técnicas<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">03 · Perfil y comunidad</div>
+      <a class="nav-link" href="index.html#comunidad"><span class="nav-code">PC-01</span>Perfil público<span class="nav-dot"></span></a>
+      <a class="nav-link" href="index.html#comunidad"><span class="nav-code">PC-02</span>Búsqueda y match<span class="nav-dot"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">04 · Desarrollo profesional</div>
+      <a class="nav-link" href="index.html#desarrollo"><span class="nav-code">DP-01</span>CV builder<span class="nav-dot"></span></a>
+      <a class="nav-link" href="index.html#desarrollo"><span class="nav-code">DP-02</span>Trayectorias<span class="nav-dot"></span></a>
+    </div>
+
+    <div class="sidebar-foot">
+      ● disponible &nbsp; ● próximo &nbsp; ● en cola
+    </div>
+  </nav>
+
+  <main class="paper">
+    <div class="container">
+
+      <div class="hero-eyebrow">HB-02 · Habilidades</div>
+      <h1 class="hero-title">Herramientas técnicas</h1>
+      <p class="hero-sub">
+        Marca tu nivel real en cada herramienta, no el que te gustaría tener. Esto también es
+        autoevaluación — le sirve a quien busque armar equipo contigo saber qué tan lejos puede
+        apoyarse en ti para cada una.
+      </p>
+
+      <div class="spec-strip">
+        <div class="spec-cell"><span class="k">Herramientas</span><span class="v">6 ítems</span></div>
+        <div class="spec-cell"><span class="k">Formato</span><span class="v">4 niveles por ítem</span></div>
+        <div class="spec-cell"><span class="k">Duración</span><span class="v">~4 minutos</span></div>
+        <div class="spec-cell"><span class="k">Resultado</span><span class="v">se actualiza en vivo</span></div>
+      </div>
+
+      <div class="section-label">Marca tu nivel en cada una</div>
+      <div id="tools"></div>
+
+      <div class="results-block">
+        <div class="results-eyebrow">Resultado · HB-02</div>
+        <h2 class="results-title">Tu perfil de herramientas</h2>
+        <p class="results-sub">Se actualiza mientras marcas los niveles. Tus dos herramientas más fuertes quedan destacadas.</p>
+
+        <div id="barsContainer"></div>
+        <div class="anchor-callouts" id="calloutsContainer"></div>
+
+        <div class="share-box">
+          <span class="label">Enviar resultado a tu correo</span>
+          <div class="share-row">
+            <input type="email" class="share-input" id="emailInput" placeholder="tu-correo@ing.uchile.cl">
+            <button class="share-btn" id="emailBtn">Enviar por correo →</button>
+          </div>
+          <p class="share-note">Se abre tu aplicación de correo con el resultado ya redactado, listo para enviar.</p>
+          <p class="share-error" id="emailError">Ingresa un correo válido antes de continuar.</p>
+        </div>
+
+        <div class="results-actions">
+          <a class="nav-btn primary" href="index.html">Volver al índice →</a>
+        </div>
+      </div>
+
+      <div class="titleblock">
+        <div class="tb-cell"><span class="tb-label">Instrumento</span><span class="tb-value">HB-02 — Herramientas técnicas</span></div>
+        <div class="tb-cell"><span class="tb-label">Formato</span><span class="tb-value">4 niveles por ítem</span></div>
+        <div class="tb-cell"><span class="tb-label">Rev.</span><span class="tb-value">00</span></div>
+        <div class="tb-cell"><span class="tb-label">Anterior</span><span class="tb-value">HB-01</span></div>
+      </div>
+
+      <footer class="site-footer">Universidad de Chile — FCFM · Ingeniería Civil Industrial</footer>
+
+    </div>
+  </main>
+
+</div>
+
+<style>
+  .nav-btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    background:none;
+    border:1px solid var(--ink-faint);
+    color:var(--ink);
+    padding:10px 18px;
+    border-radius:var(--radius);
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-flex;
+  }
+  .nav-btn.primary{background:var(--ink); color:#F2F6FA; border-color:var(--ink);}
+  .nav-btn.primary:hover{background:#1C3757;}
+</style>
+
+<script>
+  const LEVELS = ["Sin experiencia", "Básico", "Intermedio", "Avanzado"];
+
+  const TOOLS = {
+    EXC: { name: "Excel avanzado",          desc: "Tablas dinámicas, macros, modelos.", value: 1 },
+    SQL: { name: "SQL",                     desc: "Consultas, joins, bases de datos.", value: 1 },
+    PY:  { name: "Python",                  desc: "Análisis de datos, automatización.", value: 1 },
+    BI:  { name: "Power BI / Tableau",      desc: "Dashboards e indicadores.", value: 1 },
+    SIM: { name: "Modelamiento y simulación", desc: "Optimización, simulación de procesos.", value: 1 },
+    STY: { name: "Storytelling con datos",  desc: "Comunicar hallazgos con claridad.", value: 1 }
+  };
+
+  const toolsContainer = document.getElementById('tools');
+
+  Object.entries(TOOLS).forEach(([code, tool]) => {
+    const row = document.createElement('div');
+    row.className = 'tool-row';
+    const levelButtons = LEVELS.map((label, idx) =>
+      `<button type="button" class="level-btn${idx === tool.value ? ' selected' : ''}" data-code="${code}" data-level="${idx}">${label}</button>`
+    ).join('');
+    row.innerHTML = `
+      <div class="tool-head">
+        <span class="name">${tool.name}</span>
+        <span class="desc">${tool.desc}</span>
+      </div>
+      <div class="level-row">${levelButtons}</div>
+    `;
+    toolsContainer.appendChild(row);
+  });
+
+  toolsContainer.querySelectorAll('.level-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const code = btn.dataset.code;
+      const level = parseInt(btn.dataset.level);
+      TOOLS[code].value = level;
+      toolsContainer.querySelectorAll(`.level-btn[data-code="${code}"]`).forEach(b => {
+        b.classList.toggle('selected', parseInt(b.dataset.level) === level);
+      });
+      renderResults();
+    });
+  });
+
+  function renderResults(){
+    const ranked = Object.entries(TOOLS).sort((a, b) => b[1].value - a[1].value);
+
+    const barsContainer = document.getElementById('barsContainer');
+    barsContainer.innerHTML = '';
+    ranked.forEach(([code, tool], rank) => {
+      const row = document.createElement('div');
+      row.className = 'anchor-bar' + (rank === 0 ? ' top-1' : rank === 1 ? ' top-2' : '');
+      row.innerHTML = `
+        <span class="anchor-name">${tool.name}</span>
+        <div class="anchor-track"><div class="anchor-fill" style="width:${(tool.value / 3 * 100).toFixed(0)}%"></div></div>
+        <span class="anchor-value">${LEVELS[tool.value]}</span>
+      `;
+      barsContainer.appendChild(row);
+    });
+
+    const calloutsContainer = document.getElementById('calloutsContainer');
+    calloutsContainer.innerHTML = '';
+    ranked.slice(0, 2).forEach(([code, tool], rank) => {
+      const div = document.createElement('div');
+      div.className = 'callout';
+      div.innerHTML = `
+        <div class="rank">${rank === 0 ? 'Herramienta más fuerte' : 'Segunda herramienta'}</div>
+        <h4>${tool.name}</h4>
+        <p>${tool.desc} — nivel: ${LEVELS[tool.value]}.</p>
+      `;
+      calloutsContainer.appendChild(div);
+    });
+  }
+
+  renderResults();
+
+  /* ---------------- send result by email (mailto) ---------------- */
+  const emailInput = document.getElementById('emailInput');
+  const emailBtn = document.getElementById('emailBtn');
+  const emailError = document.getElementById('emailError');
+
+  emailBtn.addEventListener('click', () => {
+    const email = emailInput.value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if(!valid){
+      emailError.classList.add('visible');
+      return;
+    }
+    emailError.classList.remove('visible');
+
+    const ranked = Object.entries(TOOLS).sort((a, b) => b[1].value - a[1].value);
+    const lines = ranked.map(([code, tool], i) => `${i + 1}. ${tool.name} — ${LEVELS[tool.value]}`).join('\n');
+
+    const subject = 'Mi resultado — HB-02 Herramientas técnicas';
+    const body =
+`Autoevaluación de herramientas técnicas — Plano, ICI U. de Chile
+
+Herramienta más fuerte: ${ranked[0][1].name} (${LEVELS[ranked[0][1].value]})
+Segunda herramienta: ${ranked[1][1].name} (${LEVELS[ranked[1][1].value]})
+
+Nivel completo:
+${lines}
+
+Generado en Plano — red profesional ICI.`;
+
+    const mailto = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+  });
+
+  /* ---------------- sidebar mobile toggle ---------------- */
+  const toggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  toggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+</script>
+
+</body>
+</html>
