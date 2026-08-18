@@ -173,11 +173,7 @@ a{color:inherit;}
 .paper{
   flex:1;
   min-width:0;
-  background-image:
-    linear-gradient(rgba(28,43,57,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(28,43,57,0.035) 1px, transparent 1px);
-  background-size:40px 40px;
-  background-position:-1px -1px;
+  background:var(--paper);
   position:relative;
 }
 
