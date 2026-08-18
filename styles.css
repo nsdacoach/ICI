@@ -6,22 +6,23 @@
    ============================================================ */
 
 :root{
-  --paper:#FFFFFF;
-  --paper-deep:#F6F6F4;
-  --grid-line:#E4E4E1;
-  --ink:#1C2B39;
-  --ink-soft:#57616B;
-  --ink-faint:#8D949B;
-  --panel:#FFFFFF;
-  --panel-line:#E4E4E1;
-  --accent:#3D5A80;
-  --accent-deep:#24374F;
-  --ok:#2F7D5F;
-  --ok-bg:#E4EEE9;
-  --wait:#9AA1A8;
-  --wait-bg:#EFEFED;
-  --next-bg:#EEF2F6;
-  --radius:3px;
+  --paper:#111317;
+  --paper-deep:#1A1D22;
+  --grid-line:#2A2F36;
+  --ink:#EDEFF1;
+  --ink-soft:#A7AFB7;
+  --ink-faint:#6E767E;
+  --panel:#0A0C0F;
+  --panel-line:#22262B;
+  --accent:#34C795;
+  --accent-deep:#1F9C74;
+  --accent-text:#08110D;
+  --ok:#34C795;
+  --ok-bg:#132420;
+  --wait:#7A828B;
+  --wait-bg:#1B1E22;
+  --next-bg:#12241D;
+  --radius:4px;
   --sidebar-w:272px;
 }
 
@@ -166,7 +167,7 @@ a{color:inherit;}
   font-family:'IBM Plex Mono', monospace;
   font-size:18px;
   cursor:pointer;
-  box-shadow:0 2px 8px rgba(28,43,57,0.08);
+  box-shadow:0 4px 14px rgba(0,0,0,0.5);
 }
 
 /* ---------- main / content area ---------- */
@@ -211,9 +212,9 @@ footer.site-footer{
 /* ---------- share-by-email box (used on every results screen) ---------- */
 .share-box{
   margin-top:40px;
-  border:1px solid var(--ink);
+  border:1px solid var(--grid-line);
   padding:20px 22px;
-  background:#F4F7F9;
+  background:var(--paper-deep);
   max-width:640px;
 }
 .share-box .label{
@@ -234,31 +235,33 @@ footer.site-footer{
   flex:1;
   min-width:200px;
   padding:10px 12px;
-  border:1px solid var(--ink-faint);
+  border:1px solid var(--grid-line);
   border-radius:var(--radius);
   font-family:'IBM Plex Sans', sans-serif;
   font-size:14px;
-  background:#fff;
+  background:var(--panel);
   color:var(--ink);
 }
+.share-input::placeholder{color:var(--ink-faint);}
 .share-input:focus{
   outline:2px solid var(--accent);
   outline-offset:1px;
-  border-color:var(--ink);
+  border-color:var(--accent);
 }
 .share-btn{
   font-family:'IBM Plex Mono', monospace;
   font-size:13px;
-  background:var(--ink);
-  color:#F2F6FA;
+  background:var(--accent);
+  color:var(--accent-text);
   border:none;
   padding:10px 18px;
   border-radius:var(--radius);
   cursor:pointer;
   white-space:nowrap;
+  font-weight:600;
   transition:background 0.15s ease;
 }
-.share-btn:hover{background:#2A3E52;}
+.share-btn:hover{background:var(--accent-deep);}
 .share-note{
   font-size:11.5px;
   color:var(--ink-faint);
@@ -266,7 +269,7 @@ footer.site-footer{
 }
 .share-error{
   font-size:11.5px;
-  color:#B3401F;
+  color:#FF7A5C;
   margin-top:10px;
   display:none;
 }
@@ -307,7 +310,7 @@ footer.site-footer{
 }
 .anchor-track{
   height:14px;
-  background:#DCE5EC;
+  background:var(--grid-line);
   border:1px solid var(--grid-line);
   position:relative;
 }
@@ -328,7 +331,7 @@ footer.site-footer{
   gap:16px;
 }
 .callout{
-  background:#F4F7F9;
+  background:var(--paper-deep);
   border:1px solid var(--grid-line);
   border-left:3px solid var(--accent);
   padding:18px 20px;

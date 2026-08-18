@@ -88,7 +88,7 @@
   }
 
   .card{
-    background:#F4F7F9;
+    background:var(--paper-deep);
     border:1px solid var(--grid-line);
     border-radius:var(--radius);
     padding:18px 18px 16px;
@@ -107,7 +107,7 @@
   .card:hover{
     transform:translateY(-2px);
     border-color:var(--ink-faint);
-    box-shadow:0 6px 18px rgba(18,37,60,0.08);
+    box-shadow:0 8px 24px rgba(0,0,0,0.45);
   }
   .card.is-next{border-color:var(--accent); background:var(--next-bg);}
   .card.is-next::before{border-top-color:var(--accent-deep);}
@@ -135,7 +135,7 @@
   }
   .badge.ok{background:var(--ok-bg); color:var(--ok);}
   .badge.wait{background:var(--wait-bg); color:var(--wait);}
-  .badge.next{background:var(--accent); color:#FFFFFF;}
+  .badge.next{background:var(--accent); color:var(--accent-text);}
 
   .card-title{
     font-family:'IBM Plex Sans', sans-serif;
@@ -242,44 +242,44 @@
       <svg class="schematic" viewBox="0 0 840 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama del flujo: autoconocimiento, habilidades, perfil, comunidad">
         <defs>
           <marker id="tick" markerWidth="10" markerHeight="10" refX="5" refY="5">
-            <line x1="5" y1="0" x2="5" y2="10" stroke="#8D949B" stroke-width="1"/>
+            <line x1="5" y1="0" x2="5" y2="10" stroke="#6E767E" stroke-width="1"/>
           </marker>
         </defs>
-        <line x1="60" y1="60" x2="780" y2="60" stroke="#DADAD6" stroke-width="1" marker-start="url(#tick)" marker-end="url(#tick)"/>
-        <text x="420" y="42" text-anchor="middle" font-size="10" fill="#8D949B" letter-spacing="1">RUTA · ~6 INSTRUMENTOS · 40 MIN TOTAL</text>
+        <line x1="60" y1="60" x2="780" y2="60" stroke="#3A404A" stroke-width="1" marker-start="url(#tick)" marker-end="url(#tick)"/>
+        <text x="420" y="42" text-anchor="middle" font-size="10" fill="#6E767E" letter-spacing="1">RUTA · ~6 INSTRUMENTOS · 40 MIN TOTAL</text>
 
         <g>
-          <circle cx="90" cy="130" r="26" fill="none" stroke="#1C2B39" stroke-width="1.6"/>
-          <text x="90" y="134" text-anchor="middle" font-size="11" fill="#1C2B39" font-weight="600">01</text>
-          <text x="90" y="176" text-anchor="middle" font-size="11" fill="#57616B">Autoconocimiento</text>
-          <text x="90" y="192" text-anchor="middle" font-size="9" fill="#8D949B">AC-01 → AC-05</text>
+          <circle cx="90" cy="130" r="26" fill="none" stroke="#4B535B" stroke-width="1.6"/>
+          <text x="90" y="134" text-anchor="middle" font-size="11" fill="#EDEFF1" font-weight="600">01</text>
+          <text x="90" y="176" text-anchor="middle" font-size="11" fill="#A7AFB7">Autoconocimiento</text>
+          <text x="90" y="192" text-anchor="middle" font-size="9" fill="#6E767E">AC-01 → AC-05</text>
         </g>
 
-        <line x1="140" y1="130" x2="270" y2="130" stroke="#DADAD6" stroke-width="1.4" stroke-dasharray="3 4"/>
+        <line x1="140" y1="130" x2="270" y2="130" stroke="#3A404A" stroke-width="1.4" stroke-dasharray="3 4"/>
 
         <g>
-          <circle cx="320" cy="130" r="26" fill="none" stroke="#1C2B39" stroke-width="1.6"/>
-          <text x="320" y="134" text-anchor="middle" font-size="11" fill="#1C2B39" font-weight="600">02</text>
-          <text x="320" y="176" text-anchor="middle" font-size="11" fill="#57616B">Habilidades</text>
-          <text x="320" y="192" text-anchor="middle" font-size="9" fill="#8D949B">HB-01 → HB-02</text>
+          <circle cx="320" cy="130" r="26" fill="none" stroke="#4B535B" stroke-width="1.6"/>
+          <text x="320" y="134" text-anchor="middle" font-size="11" fill="#EDEFF1" font-weight="600">02</text>
+          <text x="320" y="176" text-anchor="middle" font-size="11" fill="#A7AFB7">Habilidades</text>
+          <text x="320" y="192" text-anchor="middle" font-size="9" fill="#6E767E">HB-01 → HB-02</text>
         </g>
 
-        <line x1="370" y1="130" x2="500" y2="130" stroke="#DADAD6" stroke-width="1.4" stroke-dasharray="3 4"/>
+        <line x1="370" y1="130" x2="500" y2="130" stroke="#3A404A" stroke-width="1.4" stroke-dasharray="3 4"/>
 
         <g>
-          <circle cx="550" cy="130" r="26" fill="#1C2B39" stroke="#1C2B39" stroke-width="1.6"/>
-          <text x="550" y="134" text-anchor="middle" font-size="11" fill="#3D5A80" font-weight="600">03</text>
-          <text x="550" y="176" text-anchor="middle" font-size="11" fill="#57616B">Ficha / Perfil</text>
-          <text x="550" y="192" text-anchor="middle" font-size="9" fill="#8D949B">PC-01</text>
+          <circle cx="550" cy="130" r="26" fill="#34C795" stroke="#34C795" stroke-width="1.6"/>
+          <text x="550" y="134" text-anchor="middle" font-size="11" fill="#08110D" font-weight="600">03</text>
+          <text x="550" y="176" text-anchor="middle" font-size="11" fill="#A7AFB7">Ficha / Perfil</text>
+          <text x="550" y="192" text-anchor="middle" font-size="9" fill="#6E767E">PC-01</text>
         </g>
 
-        <line x1="600" y1="130" x2="730" y2="130" stroke="#DADAD6" stroke-width="1.4" stroke-dasharray="3 4"/>
+        <line x1="600" y1="130" x2="730" y2="130" stroke="#3A404A" stroke-width="1.4" stroke-dasharray="3 4"/>
 
         <g>
-          <circle cx="780" cy="130" r="26" fill="none" stroke="#1C2B39" stroke-width="1.6"/>
-          <text x="780" y="134" text-anchor="middle" font-size="11" fill="#1C2B39" font-weight="600">04</text>
-          <text x="780" y="176" text-anchor="middle" font-size="11" fill="#57616B">Comunidad</text>
-          <text x="780" y="192" text-anchor="middle" font-size="9" fill="#8D949B">PC-02 · DP</text>
+          <circle cx="780" cy="130" r="26" fill="none" stroke="#4B535B" stroke-width="1.6"/>
+          <text x="780" y="134" text-anchor="middle" font-size="11" fill="#EDEFF1" font-weight="600">04</text>
+          <text x="780" y="176" text-anchor="middle" font-size="11" fill="#A7AFB7">Comunidad</text>
+          <text x="780" y="192" text-anchor="middle" font-size="9" fill="#6E767E">PC-02 · DP</text>
         </g>
       </svg>
 
