@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PC-02 · Búsqueda y match — Plano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px;}
+  .hero-title{font-weight:700;font-size:clamp(34px,5.6vw,52px);line-height:1.05;letter-spacing:-.01em;margin:0 0 16px;}
+  .hero-sub{max-width:620px;color:var(--ink-soft);margin-bottom:20px;}
+  .disclaimer{font-size:12.5px;color:var(--ink-faint);max-width:620px;margin-bottom:28px;padding-left:12px;border-left:2px solid var(--grid-line);}
+  .nav-btn{font-family:'IBM Plex Mono',monospace;font-size:13px;background:none;border:1px solid var(--ink-faint);color:var(--ink);padding:10px 18px;border-radius:var(--radius);cursor:pointer;text-decoration:none;display:inline-flex;}
+  .nav-btn:hover{border-color:var(--ink);} .nav-btn.primary{background:var(--accent);color:var(--accent-text);border-color:var(--accent);} .nav-btn.primary:hover{background:var(--accent-deep);}
+  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;}
+  .field label{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px;}
+  .field input,.field select{width:100%;padding:10px 12px;border:1px solid var(--grid-line);border-radius:var(--radius);background:var(--panel);color:var(--ink);font:14px 'IBM Plex Sans',sans-serif;}
+  .field input:focus,.field select:focus{outline:2px solid var(--accent);outline-offset:1px;}
+  .pcard{background:var(--paper-deep);border:1px solid var(--grid-line);border-left:3px solid var(--accent);padding:18px 20px;display:flex;flex-direction:column;gap:8px;}
+  .pcard h3{margin:0;font-size:18px;} .pcard .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-deep);}
+  .pcard .row{font-size:13px;color:var(--ink-soft);} .pcard .row b{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;margin-right:6px;}
+  .cards2{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:20px;}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;}
+  .msg{font-size:12.5px;color:var(--accent-deep);margin-top:10px;min-height:18px;}
+  @media (max-width:620px){.fgrid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">≡</button>
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <a href="index.html" style="text-decoration:none;">
+        <div class="sidebar-eyebrow">FCFM · Ingeniería Civil Industrial</div>
+        <div class="sidebar-logo">PLAN<span>O</span></div>
+      </a>
+      <div class="sidebar-tag">registro de instrumentos</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">01 · Autoconocimiento</div>
+      <a class="nav-link" href="index.html#autoconocimiento"><span class="nav-code">AC-01</span>16Personalities<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="schein.html"><span class="nav-code">AC-02</span>Anclas de Schein<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="area-ici.html"><span class="nav-code">AC-03</span>Área ICI<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="eneagrama.html"><span class="nav-code">AC-04</span>Eneagrama<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="cliftonstrengths.html"><span class="nav-code">AC-05</span>CliftonStrengths<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">02 · Habilidades</div>
+      <a class="nav-link" href="soft-skills.html"><span class="nav-code">HB-01</span>Soft skills<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="tech-tools.html"><span class="nav-code">HB-02</span>Herramientas técnicas<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">03 · Perfil y comunidad</div>
+      <a class="nav-link" href="perfil.html"><span class="nav-code">PC-01</span>Perfil público<span class="nav-dot ok"></span></a>
+      <a class="nav-link active" href="buscar.html"><span class="nav-code">PC-02</span>Búsqueda y match<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">04 · Desarrollo profesional</div>
+      <a class="nav-link" href="cv-builder.html"><span class="nav-code">DP-01</span>CV builder<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="trayectorias.html"><span class="nav-code">DP-02</span>Trayectorias<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="sidebar-foot">
+      ● disponible &nbsp; ● próximo &nbsp; ● en cola
+    </div>
+  </nav>
+  <main class="paper">
+    <div class="container">
+      <div class="hero-eyebrow">PC-02 · Perfil y comunidad</div>
+      <h1 class="hero-title">Búsqueda y match</h1>
+      <p class="hero-sub">Filtra por área, ancla o skill para encontrar compañeros con perfiles complementarios al tuyo.</p>
+      <p class="disclaimer">Los perfiles marcados "demo" son ejemplos ficticios para probar la interfaz. Tu propio perfil (si lo guardaste en PC-01) aparece como "Tú". Con un backend compartido, reemplaza el arreglo PROFILES por datos reales.</p>
+      <div class="fgrid">
+        <div class="field"><label for="q_area">Área</label><select id="q_area"><option value="">Todas</option><option>Operaciones / SCM</option><option>Finanzas</option><option>Data & Analytics</option><option>Personas / RRHH</option><option>Estrategia / Consultoría</option><option>Emprendimiento</option><option>Sustentabilidad</option></select></div>
+        <div class="field"><label for="q_text">Ancla, talento, skill o herramienta</label><input id="q_text" placeholder="ej. Python, Liderazgo, Autonomía"></div>
+      </div>
+      <div class="msg" id="count"></div>
+      <div class="cards2" id="list"></div>
+      <div class="titleblock">
+        <div class="tb-cell"><span class="tb-label">Instrumento</span><span class="tb-value">PC-02 — Búsqueda y match</span></div>
+        <div class="tb-cell"><span class="tb-label">Formato</span><span class="tb-value">Interactivo</span></div>
+        <div class="tb-cell"><span class="tb-label">Rev.</span><span class="tb-value">00</span></div>
+        <div class="tb-cell"><span class="tb-label">Anterior</span><span class="tb-value">PC-01</span></div>
+      </div>
+      <footer class="site-footer">Universidad de Chile — FCFM · Ingeniería Civil Industrial</footer>
+    </div>
+  </main>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+$('menuToggle').addEventListener('click',()=>$('sidebar').classList.toggle('open'));
+const PROFILES=[
+{name:'Camila R. (demo)',area:'Data & Analytics',gen:'2026',mbti:'INTJ',ancla:'Técnica / funcional',tal:'Analítico, Aprendiz',soft:'Pensamiento crítico',tools:'Python, SQL, Power BI'},
+{name:'Tomás V. (demo)',area:'Operaciones / SCM',gen:'2026',mbti:'ESTJ',ancla:'Directiva general',tal:'Disciplina, Responsabilidad',soft:'Liderazgo, Trabajo en equipo',tools:'Excel avanzado, Modelamiento'},
+{name:'Javiera M. (demo)',area:'Personas / RRHH',gen:'2026',mbti:'ENFJ',ancla:'Servicio / causa',tal:'Empatía, Desarrollador',soft:'Comunicación, Negociación',tools:'Storytelling con datos'},
+{name:'Matías S. (demo)',area:'Finanzas',gen:'2026',mbti:'ISTP',ancla:'Seguridad / estabilidad',tal:'Analítico, Enfoque',soft:'Pensamiento crítico',tools:'Excel avanzado, SQL'},
+{name:'Fernanda L. (demo)',area:'Emprendimiento',gen:'2027',mbti:'ENTP',ancla:'Creatividad empresarial',tal:'Ideación, Activador',soft:'Adaptabilidad, Comunicación',tools:'Power BI'},
+{name:'Diego P. (demo)',area:'Estrategia / Consultoría',gen:'2026',mbti:'ENTJ',ancla:'Desafío puro',tal:'Estratega, Comando',soft:'Liderazgo, Negociación',tools:'Excel avanzado, Storytelling con datos'},
+{name:'Valentina A. (demo)',area:'Sustentabilidad',gen:'2026',mbti:'INFP',ancla:'Servicio / causa',tal:'Positivo, Armonía',soft:'Adaptabilidad',tools:'Modelamiento y simulación'}
+];
+try{const me=JSON.parse(localStorage.getItem('plano_profile'));if(me&&me.name){me.name=me.name+' (Tú)';PROFILES.unshift(me);}}catch(e){}
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const ROWS=[['mbti','MBTI'],['ancla','Anclas'],['tal','Talentos'],['soft','Soft skills'],['tools','Herramientas']];
+function draw(){
+  const a=$('q_area').value,t=$('q_text').value.trim().toLowerCase();
+  const r=PROFILES.filter(p=>(!a||p.area===a)&&(!t||[p.mbti,p.ancla,p.enea,p.tal,p.soft,p.tools].join(' ').toLowerCase().includes(t)));
+  $('count').textContent=r.length+' perfil'+(r.length===1?'':'es');
+  $('list').innerHTML=r.map(p=>'<div class="pcard"><div class="meta">'+esc([p.area,p.gen&&'Egreso '+p.gen].filter(Boolean).join(' · '))+'</div><h3>'+esc(p.name)+'</h3>'+ROWS.filter(x=>p[x[0]]).map(x=>'<div class="row"><b>'+x[1]+'</b>'+esc(p[x[0]])+'</div>').join('')+'</div>').join('');
+}
+$('q_area').addEventListener('change',draw);$('q_text').addEventListener('input',draw);draw();
+</script>
+</body>
+</html>

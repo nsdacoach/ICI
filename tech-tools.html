@@ -129,7 +129,7 @@
       <a class="nav-link" href="schein.html"><span class="nav-code">AC-02</span>Anclas de Schein<span class="nav-dot ok"></span></a>
       <a class="nav-link" href="area-ici.html"><span class="nav-code">AC-03</span>Área ICI<span class="nav-dot ok"></span></a>
       <a class="nav-link" href="eneagrama.html"><span class="nav-code">AC-04</span>Eneagrama<span class="nav-dot ok"></span></a>
-      <a class="nav-link" href="index.html#autoconocimiento"><span class="nav-code">AC-05</span>CliftonStrengths<span class="nav-dot"></span></a>
+      <a class="nav-link" href="cliftonstrengths.html"><span class="nav-code">AC-05</span>CliftonStrengths<span class="nav-dot ok"></span></a>
     </div>
 
     <div class="nav-group">
@@ -140,14 +140,14 @@
 
     <div class="nav-group">
       <div class="nav-group-title">03 · Perfil y comunidad</div>
-      <a class="nav-link" href="index.html#comunidad"><span class="nav-code">PC-01</span>Perfil público<span class="nav-dot"></span></a>
-      <a class="nav-link" href="index.html#comunidad"><span class="nav-code">PC-02</span>Búsqueda y match<span class="nav-dot"></span></a>
+      <a class="nav-link" href="perfil.html"><span class="nav-code">PC-01</span>Perfil público<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="buscar.html"><span class="nav-code">PC-02</span>Búsqueda y match<span class="nav-dot ok"></span></a>
     </div>
 
     <div class="nav-group">
       <div class="nav-group-title">04 · Desarrollo profesional</div>
       <a class="nav-link" href="cv-builder.html"><span class="nav-code">DP-01</span>CV builder<span class="nav-dot ok"></span></a>
-      <a class="nav-link" href="index.html#desarrollo"><span class="nav-code">DP-02</span>Trayectorias<span class="nav-dot"></span></a>
+      <a class="nav-link" href="trayectorias.html"><span class="nav-code">DP-02</span>Trayectorias<span class="nav-dot ok"></span></a>
     </div>
 
     <div class="sidebar-foot">
@@ -274,6 +274,7 @@
 
   function renderResults(){
     const ranked = Object.entries(TOOLS).sort((a, b) => b[1].value - a[1].value);
+    try{localStorage.setItem('plano_hb02',JSON.stringify(ranked.slice(0,2).map(r=>r[1].name)));}catch(e){}
 
     const barsContainer = document.getElementById('barsContainer');
     barsContainer.innerHTML = '';

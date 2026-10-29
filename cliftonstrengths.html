@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AC-05 · Talentos (CliftonStrengths) — Plano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px;}
+  .hero-title{font-weight:700;font-size:clamp(34px,5.6vw,52px);line-height:1.05;letter-spacing:-.01em;margin:0 0 16px;}
+  .hero-sub{max-width:600px;color:var(--ink-soft);margin-bottom:28px;}
+  .spec-strip{display:flex;flex-wrap:wrap;border:1px solid var(--ink);margin-bottom:20px;}
+  .spec-cell{flex:1 1 140px;padding:12px 16px;border-right:1px solid var(--ink);font-family:'IBM Plex Mono',monospace;}
+  .spec-cell:last-child{border-right:none;}
+  .spec-cell .k{display:block;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:3px;}
+  .spec-cell .v{font-size:13px;}
+  .disclaimer{font-size:12.5px;color:var(--ink-faint);max-width:600px;margin-bottom:28px;padding-left:12px;border-left:2px solid var(--grid-line);}
+  .start-btn,.nav-btn{font-family:'IBM Plex Mono',monospace;cursor:pointer;border-radius:var(--radius);text-decoration:none;display:inline-flex;align-items:center;gap:10px;}
+  .start-btn{background:var(--accent);color:var(--accent-text);border:none;font-size:13.5px;padding:14px 22px;}
+  .start-btn:hover,.nav-btn.primary:hover{background:var(--accent-deep);}
+  .quiz-wrap{display:none;} .quiz-wrap.active{display:block;}
+  .hidden{display:none;}
+  .progress-rail{margin:8px 0 44px;}
+  .progress-meta{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-bottom:8px;}
+  .progress-track{position:relative;height:8px;background:var(--grid-line);border:1px solid var(--grid-line);}
+  .progress-fill{position:absolute;top:0;left:0;bottom:0;background:var(--accent);width:0;transition:width .25s ease;}
+  .question-code{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-deep);letter-spacing:.06em;margin-bottom:10px;}
+  .question-text{font-weight:600;font-size:clamp(22px,3.4vw,30px);line-height:1.25;margin:0 0 40px;max-width:640px;}
+  .scale{max-width:640px;} .scale-row{display:flex;gap:8px;}
+  .scale-btn{flex:1;aspect-ratio:1;max-width:64px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:16px;border-radius:50%;cursor:pointer;transition:transform .12s ease;}
+  .scale-btn:hover{transform:translateY(-2px);}
+  .scale-btn.selected{background:var(--ink);color:var(--accent);}
+  .scale-labels{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink-faint);margin-top:10px;}
+  .quiz-nav{display:flex;justify-content:space-between;margin-top:40px;max-width:640px;}
+  .nav-btn{font-size:13px;background:none;border:1px solid var(--ink-faint);color:var(--ink);padding:10px 18px;}
+  .nav-btn:hover:not(:disabled){border-color:var(--ink);background:var(--grid-line);}
+  .nav-btn:disabled{opacity:.35;cursor:not-allowed;}
+  .nav-btn.primary{background:var(--accent);color:var(--accent-text);border-color:var(--accent);}
+  .dom{font-size:10px;color:var(--ink-faint);display:block;font-weight:400;}
+  .note{margin-top:16px;font-size:12.5px;color:var(--ink-faint);max-width:640px;}
+  @media (max-width:620px){.scale-btn{max-width:44px;font-size:13px;}}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">≡</button>
+
+<div class="shell">
+
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <a href="index.html" style="text-decoration:none;">
+        <div class="sidebar-eyebrow">FCFM · Ingeniería Civil Industrial</div>
+        <div class="sidebar-logo">PLAN<span>O</span></div>
+      </a>
+      <div class="sidebar-tag">registro de instrumentos</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">01 · Autoconocimiento</div>
+      <a class="nav-link" href="index.html#autoconocimiento"><span class="nav-code">AC-01</span>16Personalities<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="schein.html"><span class="nav-code">AC-02</span>Anclas de Schein<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="area-ici.html"><span class="nav-code">AC-03</span>Área ICI<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="eneagrama.html"><span class="nav-code">AC-04</span>Eneagrama<span class="nav-dot ok"></span></a>
+      <a class="nav-link active" href="cliftonstrengths.html"><span class="nav-code">AC-05</span>CliftonStrengths<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">02 · Habilidades</div>
+      <a class="nav-link" href="soft-skills.html"><span class="nav-code">HB-01</span>Soft skills<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="tech-tools.html"><span class="nav-code">HB-02</span>Herramientas técnicas<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">03 · Perfil y comunidad</div>
+      <a class="nav-link" href="perfil.html"><span class="nav-code">PC-01</span>Perfil público<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="buscar.html"><span class="nav-code">PC-02</span>Búsqueda y match<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">04 · Desarrollo profesional</div>
+      <a class="nav-link" href="cv-builder.html"><span class="nav-code">DP-01</span>CV builder<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="trayectorias.html"><span class="nav-code">DP-02</span>Trayectorias<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="sidebar-foot">
+      ● disponible &nbsp; ● próximo &nbsp; ● en cola
+    </div>
+  </nav>
+
+  <main class="paper">
+    <div class="container">
+
+      <div id="introWrap">
+        <div class="hero-eyebrow">AC-05 · Autoconocimiento</div>
+        <h1 class="hero-title">Talentos<br>(estilo CliftonStrengths)</h1>
+        <p class="hero-sub">
+          Este enfoque parte de una idea simple: rendimos más potenciando lo que ya hacemos con naturalidad
+          que corrigiendo debilidades. Aquí identificas tus <strong>talentos dominantes</strong> entre 16 temas,
+          agrupados en cuatro dominios, para ponerles lenguaje en tu CV y en tu perfil.
+        </p>
+        <div class="spec-strip">
+          <div class="spec-cell"><span class="k">Ítems</span><span class="v">32 afirmaciones</span></div>
+          <div class="spec-cell"><span class="k">Escala</span><span class="v">1 a 6, sin punto medio</span></div>
+          <div class="spec-cell"><span class="k">Duración</span><span class="v">~8 minutos</span></div>
+          <div class="spec-cell"><span class="k">Resultado</span><span class="v">tus 5 talentos top</span></div>
+        </div>
+        <p class="disclaimer">Versión exploratoria y breve, con ítems propios. No es el CliftonStrengths oficial de Gallup (34 temas, evaluación certificada); sirve como aproximación para conversar sobre tus talentos.</p>
+        <button class="start-btn" id="startBtn">Empezar test <span>→</span></button>
+      </div>
+
+      <div class="quiz-wrap" id="quizWrap">
+        <div class="progress-rail">
+          <div class="progress-meta"><span id="progressLabel">Pregunta 01 / 32</span><span>AC-05 · Talentos</span></div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+        <div class="question-code" id="questionCode">ÍTEM 01</div>
+        <h2 class="question-text" id="questionText">—</h2>
+        <div class="scale">
+          <div class="scale-row" id="scaleRow"></div>
+          <div class="scale-labels"><span>Muy en desacuerdo</span><span>Muy de acuerdo</span></div>
+        </div>
+        <div class="quiz-nav">
+          <button class="nav-btn" id="prevBtn">← Anterior</button>
+          <button class="nav-btn primary" id="nextBtn" disabled>Siguiente →</button>
+        </div>
+      </div>
+
+      <div class="hidden" id="resultsWrap">
+        <div class="results-eyebrow">Resultado · AC-05</div>
+        <h2 class="results-title">Tu ficha de talentos</h2>
+        <p class="results-sub">Puntaje por talento (máximo 12 cada uno). Los cinco más altos son tus talentos dominantes; los dos primeros se destacan abajo.</p>
+        <div id="barsContainer"></div>
+        <div class="anchor-callouts" id="calloutsContainer"></div>
+        <p class="note" id="topNote"></p>
+
+        <div class="share-box">
+          <span class="label">Enviar resultado a tu correo</span>
+          <div class="share-row">
+            <input type="email" class="share-input" id="emailInput" placeholder="tu-correo@ing.uchile.cl">
+            <button class="share-btn" id="emailBtn">Enviar por correo →</button>
+          </div>
+          <p class="share-note">Se abre tu aplicación de correo con el resultado ya redactado, listo para enviar.</p>
+          <p class="share-error" id="emailError">Ingresa un correo válido antes de continuar.</p>
+        </div>
+
+        <div class="results-actions">
+          <button class="nav-btn" id="retakeBtn">↺ Repetir test</button>
+          <a class="nav-btn primary" href="index.html">Volver al índice →</a>
+        </div>
+      </div>
+
+      <div class="titleblock">
+        <div class="tb-cell"><span class="tb-label">Instrumento</span><span class="tb-value">AC-05 — Talentos (CliftonStrengths)</span></div>
+        <div class="tb-cell"><span class="tb-label">Escala</span><span class="tb-value">Likert 1–6</span></div>
+        <div class="tb-cell"><span class="tb-label">Rev.</span><span class="tb-value">00</span></div>
+        <div class="tb-cell"><span class="tb-label">Anterior</span><span class="tb-value">AC-04</span></div>
+      </div>
+
+      <footer class="site-footer">Universidad de Chile — FCFM · Ingeniería Civil Industrial</footer>
+    </div>
+  </main>
+</div>
+
+<script>
+  const T = {
+    ACH:["Logro","Ejecución","Te impulsa el avance constante: sientes que cada día debe terminar con algo cumplido."],
+    DIS:["Disciplina","Ejecución","Aportas estructura, rutinas y orden; haces predecible y limpio lo que otros ven caótico."],
+    RES:["Responsabilidad","Ejecución","Asumes los compromisos como propios y respondes por ellos hasta el final."],
+    FOC:["Enfoque","Ejecución","Defines una meta clara y filtras todo lo que te aleja de ella."],
+    COM:["Comando","Influencia","Tomas posición y dirección con naturalidad cuando el grupo lo necesita."],
+    CMU:["Comunicación","Influencia","Pones ideas en palabras claras y atractivas, a una persona o a una sala."],
+    CPT:["Competitividad","Influencia","Te mides contra otros y contra estándares; ganar te activa."],
+    ACT:["Activador","Influencia","Conviertes ideas en acción; prefieres empezar antes que seguir planificando."],
+    EMP:["Empatía","Relaciones","Percibes lo que sienten otros y lo usas para conectar y apoyar."],
+    ARM:["Armonía","Relaciones","Buscas puntos en común y reduces el conflicto para avanzar juntos."],
+    DEV:["Desarrollador","Relaciones","Detectas el potencial en otros y disfrutas verlos crecer."],
+    POS:["Positivo","Relaciones","Contagias energía y entusiasmo; haces que el trabajo se sienta liviano."],
+    STR:["Estratega","Pensamiento","Ves patrones y caminos alternativos para llegar a donde quieres."],
+    ANA:["Analítico","Pensamiento","Pides evidencia, buscas causas y separas lo que importa de lo que no."],
+    IDE:["Ideación","Pensamiento","Te fascinan las ideas nuevas y las conexiones inesperadas entre cosas."],
+    LRN:["Aprendiz","Pensamiento","Te energiza aprender; el proceso de dominar algo importa tanto como el resultado."]
+  };
+  const Q = [
+    ["Me siento satisfecho/a solo cuando termino cosas concretas durante el día.","ACH"],
+    ["Trabajo muchas horas sin que me lo pidan cuando hay algo por lograr.","ACH"],
+    ["Me organizo con listas, rutinas y plazos que respeto.","DIS"],
+    ["El desorden o los imprevistos me incomodan hasta que los ordeno.","DIS"],
+    ["Si me comprometo con algo, lo cumplo aunque me cueste.","RES"],
+    ["Me incomoda dejar un trabajo a medias o delegar mi parte.","RES"],
+    ["Con una meta clara, me cuesta distraerme con otras cosas.","FOC"],
+    ["Pregunto \"¿esto nos acerca al objetivo?\" antes de dedicar tiempo.","FOC"],
+    ["Cuando nadie decide, tiendo a asumir la dirección.","COM"],
+    ["No me cuesta decir lo que pienso y defender una postura.","COM"],
+    ["Me resulta fácil explicar ideas complejas de forma atractiva.","CMU"],
+    ["Disfruto presentar o contar historias ante un grupo.","CMU"],
+    ["Me motiva compararme con otros y superar sus resultados.","CPT"],
+    ["Rindo más cuando hay un ranking, una meta exigente o un rival.","CPT"],
+    ["Prefiero probar algo ya, aunque sea imperfecto, que seguir discutiéndolo.","ACT"],
+    ["Me impaciento cuando un grupo planifica demasiado sin avanzar.","ACT"],
+    ["Noto el estado de ánimo de las personas incluso sin que lo digan.","EMP"],
+    ["Las emociones de quienes me rodean influyen en mis propias decisiones.","EMP"],
+    ["Evito los choques y busco acuerdos que dejen conformes a todos.","ARM"],
+    ["Me incomodan las discusiones que no llevan a ningún lado.","ARM"],
+    ["Me entusiasma ver cómo otra persona mejora gracias a mi apoyo.","DEV"],
+    ["Recuerdo en qué ha progresado alguien y se lo hago notar.","DEV"],
+    ["Suelo ver el lado bueno y animar al grupo cuando está cansado.","POS"],
+    ["Me gusta celebrar logros pequeños y hacer el ambiente más ligero.","POS"],
+    ["Cuando enfrento un problema, imagino rápido varias rutas posibles.","STR"],
+    ["Anticipo obstáculos y ajusto el plan antes de que aparezcan.","STR"],
+    ["Antes de aceptar una afirmación, quiero ver los datos que la respaldan.","ANA"],
+    ["Me gusta buscar la causa raíz detrás de un resultado.","ANA"],
+    ["Mi cabeza genera ideas nuevas constantemente, incluso sin buscarlas.","IDE"],
+    ["Disfruto conectar temas que parecen no tener relación.","IDE"],
+    ["Aprender algo nuevo me da más energía que dominar lo que ya sé.","LRN"],
+    ["Me veo estudiando por gusto, sin que haya una nota o un título de por medio.","LRN"]
+  ];
+
+  let current = 0, lastRanked = [];
+  const answers = new Array(Q.length).fill(null);
+  const $ = id => document.getElementById(id);
+  const scaleRow = $('scaleRow'), prevBtn = $('prevBtn'), nextBtn = $('nextBtn');
+
+  for(let i = 1; i <= 6; i++){
+    const b = document.createElement('button');
+    b.className = 'scale-btn'; b.type = 'button'; b.textContent = i;
+    b.addEventListener('click', () => { answers[current] = i; render(); });
+    scaleRow.appendChild(b);
+  }
+
+  function render(){
+    $('questionCode').textContent = 'ÍTEM ' + String(current + 1).padStart(2,'0');
+    $('questionText').textContent = Q[current][0];
+    $('progressLabel').textContent = 'Pregunta ' + String(current + 1).padStart(2,'0') + ' / ' + Q.length;
+    $('progressFill').style.width = (current / Q.length * 100) + '%';
+    [...scaleRow.children].forEach((b, i) => b.classList.toggle('selected', answers[current] === i + 1));
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = answers[current] === null;
+    nextBtn.textContent = current === Q.length - 1 ? 'Ver resultado →' : 'Siguiente →';
+  }
+
+  $('startBtn').addEventListener('click', () => { $('introWrap').classList.add('hidden'); $('quizWrap').classList.add('active'); render(); });
+  prevBtn.addEventListener('click', () => { if(current > 0){ current--; render(); } });
+  nextBtn.addEventListener('click', () => {
+    if(answers[current] === null) return;
+    if(current < Q.length - 1){ current++; render(); } else showResults();
+  });
+  document.addEventListener('keydown', e => {
+    if(!$('quizWrap').classList.contains('active')) return;
+    if('123456'.includes(e.key) && e.key) { answers[current] = parseInt(e.key); render(); }
+    if(e.key === 'ArrowRight' && !nextBtn.disabled) nextBtn.click();
+    if(e.key === 'ArrowLeft' && !prevBtn.disabled) prevBtn.click();
+  });
+
+  function showResults(){
+    $('quizWrap').classList.remove('active');
+    $('resultsWrap').classList.remove('hidden');
+    const scores = {};
+    Object.keys(T).forEach(k => scores[k] = 0);
+    Q.forEach(([, c], i) => scores[c] += answers[i]);
+    const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+    lastRanked = ranked;
+    try{localStorage.setItem('plano_ac05',JSON.stringify(ranked.slice(0,5).map(r=>T[r[0]][0])));}catch(e){}
+
+    $('barsContainer').innerHTML = ranked.map(([c, s], r) => `
+      <div class="anchor-bar${r === 0 ? ' top-1' : r === 1 ? ' top-2' : ''}">
+        <span class="anchor-name">${T[c][0]}<span class="dom">${T[c][1]}${r < 5 ? ' · top 5' : ''}</span></span>
+        <div class="anchor-track"><div class="anchor-fill" style="width:${(s/12*100).toFixed(0)}%"></div></div>
+        <span class="anchor-value">${s}/12</span>
+      </div>`).join('');
+
+    $('calloutsContainer').innerHTML = ranked.slice(0, 2).map(([c], r) => `
+      <div class="callout">
+        <div class="rank">${r === 0 ? 'Talento dominante' : 'Segundo talento'} · ${T[c][1]}</div>
+        <h4>${T[c][0]}</h4>
+        <p>${T[c][2]}</p>
+      </div>`).join('');
+
+    const counts = {};
+    ranked.slice(0, 5).forEach(([c]) => counts[T[c][1]] = (counts[T[c][1]] || 0) + 1);
+    const dom = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
+    $('topNote').textContent = `Tus cinco talentos top: ${ranked.slice(0,5).map(([c]) => T[c][0]).join(', ')}. El dominio que más pesa en ellos es ${dom}.`;
+  }
+
+  $('retakeBtn').addEventListener('click', () => {
+    current = 0; answers.fill(null);
+    $('resultsWrap').classList.add('hidden');
+    $('introWrap').classList.remove('hidden');
+  });
+
+  $('emailBtn').addEventListener('click', () => {
+    const email = $('emailInput').value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ $('emailError').classList.add('visible'); return; }
+    $('emailError').classList.remove('visible');
+    const lines = lastRanked.map(([c, s], i) => `${i + 1}. ${T[c][0]} (${T[c][1]}) — ${s}/12`).join('\n');
+    const top = lastRanked[0][0];
+    const subject = 'Mi resultado — AC-05 Talentos (CliftonStrengths)';
+    const body =
+`Resultado del test de Talentos (estilo CliftonStrengths) — Plano, ICI U. de Chile
+
+Talento dominante: ${T[top][0]}
+${T[top][2]}
+
+Top 5: ${lastRanked.slice(0,5).map(([c]) => T[c][0]).join(', ')}
+
+Puntaje completo:
+${lines}
+
+Generado en Plano — red profesional ICI.`;
+    window.location.href = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+
+  $('menuToggle').addEventListener('click', () => $('sidebar').classList.toggle('open'));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PC-01 · Perfil público — Plano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px;}
+  .hero-title{font-weight:700;font-size:clamp(34px,5.6vw,52px);line-height:1.05;letter-spacing:-.01em;margin:0 0 16px;}
+  .hero-sub{max-width:620px;color:var(--ink-soft);margin-bottom:20px;}
+  .disclaimer{font-size:12.5px;color:var(--ink-faint);max-width:620px;margin-bottom:28px;padding-left:12px;border-left:2px solid var(--grid-line);}
+  .nav-btn{font-family:'IBM Plex Mono',monospace;font-size:13px;background:none;border:1px solid var(--ink-faint);color:var(--ink);padding:10px 18px;border-radius:var(--radius);cursor:pointer;text-decoration:none;display:inline-flex;}
+  .nav-btn:hover{border-color:var(--ink);} .nav-btn.primary{background:var(--accent);color:var(--accent-text);border-color:var(--accent);} .nav-btn.primary:hover{background:var(--accent-deep);}
+  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;}
+  .field label{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px;}
+  .field input,.field select{width:100%;padding:10px 12px;border:1px solid var(--grid-line);border-radius:var(--radius);background:var(--panel);color:var(--ink);font:14px 'IBM Plex Sans',sans-serif;}
+  .field input:focus,.field select:focus{outline:2px solid var(--accent);outline-offset:1px;}
+  .pcard{background:var(--paper-deep);border:1px solid var(--grid-line);border-left:3px solid var(--accent);padding:18px 20px;display:flex;flex-direction:column;gap:8px;}
+  .pcard h3{margin:0;font-size:18px;} .pcard .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-deep);}
+  .pcard .row{font-size:13px;color:var(--ink-soft);} .pcard .row b{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;margin-right:6px;}
+  .cards2{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:20px;}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;}
+  .msg{font-size:12.5px;color:var(--accent-deep);margin-top:10px;min-height:18px;}
+  @media (max-width:620px){.fgrid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">≡</button>
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <a href="index.html" style="text-decoration:none;">
+        <div class="sidebar-eyebrow">FCFM · Ingeniería Civil Industrial</div>
+        <div class="sidebar-logo">PLAN<span>O</span></div>
+      </a>
+      <div class="sidebar-tag">registro de instrumentos</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">01 · Autoconocimiento</div>
+      <a class="nav-link" href="index.html#autoconocimiento"><span class="nav-code">AC-01</span>16Personalities<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="schein.html"><span class="nav-code">AC-02</span>Anclas de Schein<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="area-ici.html"><span class="nav-code">AC-03</span>Área ICI<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="eneagrama.html"><span class="nav-code">AC-04</span>Eneagrama<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="cliftonstrengths.html"><span class="nav-code">AC-05</span>CliftonStrengths<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">02 · Habilidades</div>
+      <a class="nav-link" href="soft-skills.html"><span class="nav-code">HB-01</span>Soft skills<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="tech-tools.html"><span class="nav-code">HB-02</span>Herramientas técnicas<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">03 · Perfil y comunidad</div>
+      <a class="nav-link active" href="perfil.html"><span class="nav-code">PC-01</span>Perfil público<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="buscar.html"><span class="nav-code">PC-02</span>Búsqueda y match<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">04 · Desarrollo profesional</div>
+      <a class="nav-link" href="cv-builder.html"><span class="nav-code">DP-01</span>CV builder<span class="nav-dot ok"></span></a>
+      <a class="nav-link" href="trayectorias.html"><span class="nav-code">DP-02</span>Trayectorias<span class="nav-dot ok"></span></a>
+    </div>
+
+    <div class="sidebar-foot">
+      ● disponible &nbsp; ● próximo &nbsp; ● en cola
+    </div>
+  </nav>
+  <main class="paper">
+    <div class="container">
+      <div class="hero-eyebrow">PC-01 · Perfil y comunidad</div>
+      <h1 class="hero-title">Perfil público</h1>
+      <p class="hero-sub">Reúne tus resultados en una sola tarjeta. Los campos se rellenan solos con los tests que ya hiciste en este navegador; puedes editarlos antes de guardar.</p>
+      <p class="disclaimer">Tu perfil se guarda solo en este navegador. La tarjeta es la que alimenta <a href="buscar.html" style="color:var(--accent-deep);">PC-02</a>; para que otros compañeros la vean de verdad hace falta un backend compartido (hoy no existe).</p>
+      <div class="fgrid">
+        <div class="field"><label for="f_area">Área de interés (AC-03)</label><select id="f_area"><option value="">—</option><option>Operaciones / SCM</option><option>Finanzas</option><option>Data & Analytics</option><option>Personas / RRHH</option><option>Estrategia / Consultoría</option><option>Emprendimiento</option><option>Sustentabilidad</option></select></div>
+        <div class="field"><label for="f_name">Nombre</label><input id="f_name" placeholder="Nombre y apellido"></div><div class="field"><label for="f_gen">Año de egreso</label><input id="f_gen" placeholder="2026"></div><div class="field"><label for="f_mbti">MBTI (AC-01)</label><input id="f_mbti" placeholder="ej. INTJ"></div><div class="field"><label for="f_ancla">Anclas de carrera (AC-02)</label><input id="f_ancla" placeholder="ej. Autonomía, Desafío puro"></div><div class="field"><label for="f_enea">Eneagrama (AC-04)</label><input id="f_enea" placeholder="ej. Tipo 5 · Investigador"></div><div class="field"><label for="f_tal">Talentos top (AC-05)</label><input id="f_tal" placeholder="ej. Analítico, Estratega"></div><div class="field"><label for="f_soft">Soft skills fuertes (HB-01)</label><input id="f_soft" placeholder="ej. Comunicación, Liderazgo"></div><div class="field"><label for="f_tools">Herramientas fuertes (HB-02)</label><input id="f_tools" placeholder="ej. Python, SQL"></div>
+      </div>
+      <div class="results-eyebrow">Vista previa</div>
+      <div class="pcard" id="card"></div>
+      <div class="actions"><button class="nav-btn primary" id="saveBtn">Guardar perfil →</button><button class="nav-btn" id="copyBtn">Copiar como texto</button><a class="nav-btn" href="buscar.html">Ir a búsqueda →</a></div>
+      <p class="msg" id="msg"></p>
+      <div class="titleblock">
+        <div class="tb-cell"><span class="tb-label">Instrumento</span><span class="tb-value">PC-01 — Perfil público</span></div>
+        <div class="tb-cell"><span class="tb-label">Formato</span><span class="tb-value">Interactivo</span></div>
+        <div class="tb-cell"><span class="tb-label">Rev.</span><span class="tb-value">00</span></div>
+        <div class="tb-cell"><span class="tb-label">Anterior</span><span class="tb-value">AC-05</span></div>
+      </div>
+      <footer class="site-footer">Universidad de Chile — FCFM · Ingeniería Civil Industrial</footer>
+    </div>
+  </main>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+$('menuToggle').addEventListener('click',()=>$('sidebar').classList.toggle('open'));
+const IDS=['name','gen','mbti','ancla','enea','tal','soft','tools','area'];
+const LS=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
+const j=a=>Array.isArray(a)?a.join(', '):(a||'');
+const saved=LS('plano_profile');
+const auto={area:j((LS('plano_ac03')||[])[0]),ancla:j(LS('plano_ac02')),enea:j(LS('plano_ac04')),tal:j(LS('plano_ac05')),soft:j(LS('plano_hb01')),tools:j(LS('plano_hb02'))};
+IDS.forEach(k=>{$('f_'+k).value=(saved&&saved[k])||auto[k]||'';$('f_'+k).addEventListener('input',draw);});
+function data(){const d={};IDS.forEach(k=>d[k]=$('f_'+k).value.trim());return d;}
+const ROWS=[['mbti','MBTI'],['ancla','Anclas'],['enea','Eneagrama'],['tal','Talentos'],['soft','Soft skills'],['tools','Herramientas']];
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function draw(){const d=data();$('card').innerHTML='<div class="meta">'+esc([d.area,d.gen&&'Egreso '+d.gen].filter(Boolean).join(' · ')||'ICI · U. de Chile')+'</div><h3>'+esc(d.name||'Tu nombre')+'</h3>'+ROWS.filter(r=>d[r[0]]).map(r=>'<div class="row"><b>'+r[1]+'</b>'+esc(d[r[0]])+'</div>').join('');}
+function text(){const d=data();return (d.name||'Mi perfil')+' — ICI U. de Chile\n'+[['Área',d.area],['Egreso',d.gen]].concat(ROWS.map(r=>[r[1],d[r[0]]])).filter(r=>r[1]).map(r=>r[0]+': '+r[1]).join('\n');}
+$('saveBtn').addEventListener('click',()=>{try{localStorage.setItem('plano_profile',JSON.stringify(data()));$('msg').textContent='Perfil guardado en este navegador.';}catch(e){$('msg').textContent='No se pudo guardar (almacenamiento bloqueado).';}});
+$('copyBtn').addEventListener('click',()=>{navigator.clipboard.writeText(text()).then(()=>$('msg').textContent='Copiado.',()=>$('msg').textContent='No se pudo copiar.');});
+draw();
+</script>
+</body>
+</html>
